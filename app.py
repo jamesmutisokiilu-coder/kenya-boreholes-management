@@ -1,12 +1,15 @@
 from pathlib import Path
 import zipfile
+import os
 import webbrowser
-import time
+import threading
+
+from flask import Flask, send_from_directory
 
 
 # ============================================================
-# KENYA BOREHOLES SERVICES WEBSITE
-# PROJECT GENERATOR
+# KENYA BOREHOLES SERVICES
+# FLASK WEBSITE + PROJECT GENERATOR
 # ============================================================
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -15,12 +18,22 @@ ZIP_PATH = BASE_DIR / "Kenya_Boreholes_Services_Website.zip"
 
 
 # ============================================================
+# FLASK APPLICATION
+# ============================================================
+
+app = Flask(
+    __name__,
+    static_folder=None
+)
+
+
+# ============================================================
 # WEBSITE FILES
 # ============================================================
 
 files_to_create = {
 
-"index.html": r"""<!DOCTYPE html>
+    "index.html": r"""<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -30,17 +43,13 @@ files_to_create = {
 
     <title>Kenya Boreholes Services</title>
 
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/styles.css">
 
 </head>
 
 
 <body>
 
-
-<!-- =========================================================
-     HEADER
-========================================================= -->
 
 <header class="header">
 
@@ -75,10 +84,6 @@ files_to_create = {
 </header>
 
 
-
-<!-- =========================================================
-     HERO
-========================================================= -->
 
 <section id="home" class="hero">
 
@@ -125,10 +130,6 @@ files_to_create = {
 </section>
 
 
-
-<!-- =========================================================
-     SERVICES
-========================================================= -->
 
 <section id="services" class="section">
 
@@ -286,10 +287,6 @@ files_to_create = {
 
 
 
-<!-- =========================================================
-     QUOTATION FORM
-========================================================= -->
-
 <section
     id="quotation"
     class="quotation-section"
@@ -321,8 +318,6 @@ files_to_create = {
 
         <form id="quotationForm">
 
-
-            <!-- CUSTOMER INFORMATION -->
 
             <div class="form-heading">
 
@@ -415,12 +410,9 @@ files_to_create = {
                 </div>
 
 
-
             </div>
 
 
-
-            <!-- PROJECT INFORMATION -->
 
             <div class="form-heading second-heading">
 
@@ -554,8 +546,6 @@ files_to_create = {
 
 
 
-            <!-- ITEMS -->
-
             <div class="form-heading second-heading">
 
                 <span>
@@ -672,8 +662,6 @@ files_to_create = {
 
 
 
-            <!-- EXTRA CHARGES -->
-
             <div class="form-grid extra-charges">
 
 
@@ -716,8 +704,6 @@ files_to_create = {
 
 
 
-            <!-- NOTES -->
-
             <div class="form-group">
 
                 <label>
@@ -748,22 +734,14 @@ files_to_create = {
 
 
 
-        <!-- =================================================
-             QUOTATION RESULT
-        ================================================= -->
-
         <div
             id="quotationResult"
             class="quotation-result hidden"
         >
 
 
-            <!-- DOCUMENT -->
-
             <div id="quotationDocument">
 
-
-                <!-- DOCUMENT HEADER -->
 
                 <div class="document-top">
 
@@ -806,8 +784,7 @@ files_to_create = {
                                 Quotation Ref:
                             </strong>
 
-                            <span id="quotationNumber">
-                            </span>
+                            <span id="quotationNumber"></span>
                         </p>
 
                         <p>
@@ -815,8 +792,7 @@ files_to_create = {
                                 Date:
                             </strong>
 
-                            <span id="quotationDate">
-                            </span>
+                            <span id="quotationDate"></span>
                         </p>
 
                     </div>
@@ -826,12 +802,9 @@ files_to_create = {
 
 
 
-                <div class="document-line">
-                </div>
+                <div class="document-line"></div>
 
 
-
-                <!-- CUSTOMER / PROJECT DETAILS -->
 
                 <div class="details-table">
 
@@ -846,8 +819,7 @@ files_to_create = {
                             :
                         </div>
 
-                        <div id="resultName">
-                        </div>
+                        <div id="resultName"></div>
 
                     </div>
 
@@ -863,8 +835,7 @@ files_to_create = {
                             :
                         </div>
 
-                        <div id="resultLocation">
-                        </div>
+                        <div id="resultLocation"></div>
 
                     </div>
 
@@ -880,8 +851,7 @@ files_to_create = {
                             :
                         </div>
 
-                        <div id="resultPhone">
-                        </div>
+                        <div id="resultPhone"></div>
 
                     </div>
 
@@ -897,8 +867,7 @@ files_to_create = {
                             :
                         </div>
 
-                        <div id="resultEmail">
-                        </div>
+                        <div id="resultEmail"></div>
 
                     </div>
 
@@ -914,8 +883,7 @@ files_to_create = {
                             :
                         </div>
 
-                        <div id="resultService">
-                        </div>
+                        <div id="resultService"></div>
 
                     </div>
 
@@ -934,8 +902,7 @@ files_to_create = {
                             :
                         </div>
 
-                        <div id="resultCapacity">
-                        </div>
+                        <div id="resultCapacity"></div>
 
                     </div>
 
@@ -944,8 +911,6 @@ files_to_create = {
 
 
 
-                <!-- SECTION TITLE -->
-
                 <div class="document-section-title">
 
                     MATERIALS & REQUIREMENTS
@@ -953,8 +918,6 @@ files_to_create = {
                 </div>
 
 
-
-                <!-- QUOTATION TABLE -->
 
                 <table
                     class="quotation-table"
@@ -990,9 +953,7 @@ files_to_create = {
                     </thead>
 
 
-                    <tbody id="quotationItems">
-
-                    </tbody>
+                    <tbody id="quotationItems"></tbody>
 
 
                     <tbody>
@@ -1056,8 +1017,6 @@ files_to_create = {
 
 
 
-                <!-- TERMS -->
-
                 <div class="terms-section">
 
 
@@ -1068,9 +1027,7 @@ files_to_create = {
                     </div>
 
 
-                    <ul id="resultNotesList">
-
-                    </ul>
+                    <ul id="resultNotesList"></ul>
 
 
                     <div class="standard-terms">
@@ -1107,8 +1064,6 @@ files_to_create = {
 
 
 
-                <!-- FOOTER -->
-
                 <div class="document-footer">
 
 
@@ -1131,8 +1086,7 @@ files_to_create = {
                             Authorized By
                         </p>
 
-                        <div class="signature-line">
-                        </div>
+                        <div class="signature-line"></div>
 
                     </div>
 
@@ -1143,8 +1097,6 @@ files_to_create = {
             </div>
 
 
-
-            <!-- ACTIONS -->
 
             <div class="quotation-actions">
 
@@ -1186,10 +1138,6 @@ files_to_create = {
 </section>
 
 
-
-<!-- =========================================================
-     CONTACT
-========================================================= -->
 
 <section
     id="contact"
@@ -1271,26 +1219,38 @@ files_to_create = {
 
 
 
-<script src="app.js"></script>
+<script src="/app.js"></script>
 
 </body>
 
 </html>
 """,
 
+    # --------------------------------------------------------
+    # KEEP YOUR EXISTING CSS
+    # --------------------------------------------------------
 
+    "styles.css": r"""
+/*
+KENYA BOREHOLES SERVICES
+Stylesheet
+*/
 
-"styles.css": r"""* {
+/* Paste your existing styles.css here if it is already
+   present in the project.
+
+   The Flask application will automatically serve this file.
+*/
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-
 html {
     scroll-behavior: smooth;
 }
-
 
 body {
     font-family: Arial, Helvetica, sans-serif;
@@ -1298,11 +1258,6 @@ body {
     color: #17212b;
     line-height: 1.6;
 }
-
-
-/* =========================================================
-   HEADER
-========================================================= */
 
 .header {
     background: #ffffff;
@@ -1318,13 +1273,11 @@ body {
     box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
 
-
 .logo {
     display: flex;
     align-items: center;
     gap: 12px;
 }
-
 
 .logo-icon {
     width: 48px;
@@ -1338,23 +1291,19 @@ body {
     font-weight: bold;
 }
 
-
 .logo h1 {
     font-size: 20px;
 }
-
 
 .logo p {
     color: #687582;
     font-size: 12px;
 }
 
-
 nav {
     display: flex;
     gap: 25px;
 }
-
 
 nav a {
     text-decoration: none;
@@ -1362,20 +1311,12 @@ nav a {
     font-weight: 600;
 }
 
-
 nav a:hover {
     color: #1556a8;
 }
 
-
-
-/* =========================================================
-   HERO
-========================================================= */
-
 .hero {
     min-height: 580px;
-
     background:
         linear-gradient(
             rgba(5, 41, 70, 0.84),
@@ -1386,23 +1327,17 @@ nav a:hover {
             #1687e8,
             #0d527e
         );
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     text-align: center;
-
     padding: 80px 20px;
-
     color: white;
 }
-
 
 .hero-content {
     max-width: 850px;
 }
-
 
 .hero-label {
     font-size: 13px;
@@ -1410,13 +1345,11 @@ nav a:hover {
     font-weight: bold;
 }
 
-
 .hero h2 {
     font-size: 52px;
     line-height: 1.15;
     margin: 18px 0 20px;
 }
-
 
 .hero p {
     font-size: 20px;
@@ -1425,59 +1358,38 @@ nav a:hover {
     color: #eaf6ff;
 }
 
-
 .hero-buttons {
     margin-top: 35px;
-
     display: flex;
     justify-content: center;
-
     gap: 15px;
-
     flex-wrap: wrap;
 }
 
-
-
-/* =========================================================
-   BUTTONS
-========================================================= */
-
 .btn {
     border: none;
-
     padding: 14px 25px;
-
     border-radius: 8px;
-
     font-weight: bold;
-
     cursor: pointer;
-
     text-decoration: none;
-
     display: inline-block;
-
     transition: 0.2s;
 }
-
 
 .btn:hover {
     transform: translateY(-2px);
 }
-
 
 .primary {
     background: #1687e8;
     color: white;
 }
 
-
 .secondary {
     background: white;
     color: #1687e8;
 }
-
 
 .outline-btn {
     background: white;
@@ -1485,807 +1397,472 @@ nav a:hover {
     border: 1px solid #1556a8;
 }
 
-
-
-/* =========================================================
-   SECTIONS
-========================================================= */
-
 .section,
 .quotation-section,
 .contact-section {
     padding: 80px 7%;
 }
 
-
 .section-title {
     text-align: center;
-
     max-width: 750px;
-
     margin: 0 auto 45px;
 }
 
-
 .section-title span {
     color: #1556a8;
-
     font-size: 13px;
-
     font-weight: bold;
-
     letter-spacing: 2px;
 }
 
-
 .section-title h2 {
     font-size: 38px;
-
     margin: 8px 0;
 }
-
 
 .section-title p {
     color: #687582;
 }
 
-
-
-/* =========================================================
-   SERVICES
-========================================================= */
-
 .services-grid {
     display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
+    grid-template-columns: repeat(3, 1fr);
     gap: 25px;
 }
 
-
 .service-card {
     background: white;
-
     padding: 30px;
-
     border-radius: 14px;
-
-    box-shadow:
-        0 5px 20px rgba(0,0,0,0.06);
-
-    border:
-        1px solid #e6edf3;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+    border: 1px solid #e6edf3;
 }
-
 
 .service-icon {
     font-size: 35px;
-
     margin-bottom: 15px;
 }
-
 
 .service-card h3 {
     margin-bottom: 10px;
 }
 
-
 .service-card p {
     color: #687582;
 }
 
-
-
-/* =========================================================
-   QUOTATION FORM
-========================================================= */
-
 .quotation-section {
     background: #edf4fa;
 }
-
 
 .quotation-container {
     max-width: 1100px;
     margin: auto;
 }
 
-
 #quotationForm {
     background: white;
-
     padding: 38px;
-
     border-radius: 15px;
-
-    box-shadow:
-        0 5px 25px rgba(0,0,0,0.07);
+    box-shadow: 0 5px 25px rgba(0,0,0,0.07);
 }
-
 
 .form-heading {
     display: flex;
-
     align-items: center;
-
     gap: 15px;
-
-    border-bottom:
-        1px solid #e2e8ee;
-
+    border-bottom: 1px solid #e2e8ee;
     padding-bottom: 18px;
-
     margin-bottom: 25px;
 }
-
 
 .form-heading > span {
     width: 42px;
     height: 42px;
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     border-radius: 50%;
-
     background: #1556a8;
-
     color: white;
-
     font-weight: bold;
 }
-
 
 .form-heading h3 {
     margin-bottom: 2px;
 }
-
 
 .form-heading p {
     color: #7a8791;
     font-size: 13px;
 }
 
-
 .second-heading {
     margin-top: 35px;
 }
 
-
 .form-grid {
     display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
 }
-
 
 .form-group {
     margin-bottom: 20px;
 }
 
-
 .form-group label {
     display: block;
-
     margin-bottom: 7px;
-
     font-weight: bold;
-
     font-size: 14px;
 }
-
 
 input,
 select,
 textarea {
     width: 100%;
-
     padding: 13px;
-
-    border:
-        1px solid #ccd7df;
-
+    border: 1px solid #ccd7df;
     border-radius: 7px;
-
     font-size: 15px;
-
     outline: none;
-
     background: white;
 }
-
 
 input:focus,
 select:focus,
 textarea:focus {
     border-color: #1687e8;
-
-    box-shadow:
-        0 0 0 3px rgba(22,135,232,0.10);
+    box-shadow: 0 0 0 3px rgba(22,135,232,0.10);
 }
-
 
 textarea {
     resize: vertical;
 }
 
-
 .full-btn {
     width: 100%;
-
     font-size: 16px;
-
     margin-top: 10px;
 }
 
-
-
-/* =========================================================
-   ITEMS
-========================================================= */
-
 .items-form {
-    border:
-        1px solid #dce5eb;
-
+    border: 1px solid #dce5eb;
     border-radius: 10px;
-
     overflow: hidden;
-
     margin-bottom: 25px;
 }
-
 
 .items-header,
 .item-row {
     display: grid;
-
     grid-template-columns:
         minmax(200px, 2fr)
         120px
         170px
         170px
         50px;
-
     gap: 0;
-
     align-items: center;
 }
 
-
 .items-header {
     background: #1556a8;
-
     color: white;
-
     font-weight: bold;
-
     padding: 13px;
 }
 
-
 .item-row {
     padding: 10px;
-
-    border-top:
-        1px solid #e1e7ec;
+    border-top: 1px solid #e1e7ec;
 }
-
 
 .item-row input {
     border-radius: 4px;
-
     margin: 0 5px;
 }
 
-
 .item-amount {
     background: #f3f6f8;
-
     font-weight: bold;
 }
-
 
 .remove-item {
     width: 34px;
     height: 34px;
-
     border: none;
-
     border-radius: 50%;
-
     background: #ffe8e8;
-
     color: #d32929;
-
     font-size: 22px;
-
     cursor: pointer;
 }
-
 
 .add-item-btn {
     margin: 15px;
-
     padding: 10px 18px;
-
-    border:
-        1px dashed #1556a8;
-
+    border: 1px dashed #1556a8;
     color: #1556a8;
-
     background: #f5f9fd;
-
     border-radius: 6px;
-
     cursor: pointer;
-
     font-weight: bold;
 }
-
 
 .extra-charges {
     margin-top: 20px;
 }
 
-
-
-/* =========================================================
-   QUOTATION RESULT
-========================================================= */
-
 .quotation-result {
     margin-top: 35px;
-
     background: #dfe7ee;
-
     padding: 25px;
-
     border-radius: 10px;
 }
-
 
 .hidden {
     display: none;
 }
 
-
-
-/* =========================================================
-   ACTUAL QUOTATION DOCUMENT
-========================================================= */
-
 #quotationDocument {
     background: white;
-
     width: 100%;
-
     max-width: 1000px;
-
     margin: auto;
-
     padding: 38px;
-
-    box-shadow:
-        0 5px 25px rgba(0,0,0,0.12);
-
+    box-shadow: 0 5px 25px rgba(0,0,0,0.12);
     color: #202020;
 }
 
-
 .document-top {
     display: flex;
-
     justify-content: space-between;
-
     align-items: flex-start;
-
     gap: 30px;
 }
 
-
 .document-company {
     display: flex;
-
     align-items: center;
-
     gap: 14px;
 }
-
 
 .document-logo {
     width: 58px;
     height: 58px;
-
     background: #1556a8;
-
     color: white;
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     font-size: 20px;
-
     font-weight: bold;
-
     border-radius: 5px;
 }
 
-
 .document-company h1 {
     font-size: 22px;
-
     color: #1556a8;
-
-    letter-spacing: 0.5px;
 }
-
 
 .document-company p {
     color: #666;
-
     font-size: 13px;
 }
 
-
 .document-reference {
     text-align: right;
-
     min-width: 240px;
 }
 
-
 .document-reference h2 {
     font-size: 22px;
-
     color: #111;
-
     margin-bottom: 10px;
 }
 
-
 .document-reference p {
     font-size: 14px;
-
     margin: 3px 0;
 }
 
-
 .document-line {
     height: 2px;
-
     background: #183e73;
-
-    margin:
-        18px 0 0;
+    margin: 18px 0 0;
 }
-
-
-
-/* =========================================================
-   CUSTOMER DETAILS
-========================================================= */
 
 .details-table {
     margin-top: 5px;
-
     margin-bottom: 28px;
 }
 
-
 .detail-row {
     display: grid;
-
-    grid-template-columns:
-        180px
-        25px
-        1fr;
-
+    grid-template-columns: 180px 25px 1fr;
     min-height: 40px;
-
     align-items: center;
-
-    border-bottom:
-        1px solid #d7d7d7;
-
+    border-bottom: 1px solid #d7d7d7;
     font-size: 15px;
 }
 
-
-.detail-label {
-    font-weight: bold;
-}
-
-
+.detail-label,
 .detail-colon {
     font-weight: bold;
 }
 
-
-
-/* =========================================================
-   SECTION TITLE
-========================================================= */
-
 .document-section-title {
     color: #1556a8;
-
     font-size: 19px;
-
     font-weight: bold;
-
-    margin:
-        20px 0 10px;
+    margin: 20px 0 10px;
 }
-
-
-
-/* =========================================================
-   QUOTATION TABLE
-========================================================= */
 
 .quotation-table {
     width: 100%;
-
     border-collapse: collapse;
-
     margin-top: 10px;
-
     font-size: 14px;
 }
 
-
 .quotation-table th {
     background: #1556a8;
-
     color: white;
-
-    border:
-        1px solid #9baec3;
-
+    border: 1px solid #9baec3;
     padding: 11px 8px;
-
     text-align: left;
 }
 
-
 .quotation-table td {
-    border:
-        1px solid #c7c7c7;
-
+    border: 1px solid #c7c7c7;
     padding: 10px 8px;
-
-    vertical-align: middle;
 }
-
 
 .quotation-table tbody tr:nth-child(even) {
     background: #fafafa;
 }
 
-
 .no-column {
     width: 55px;
-
     text-align: center !important;
 }
-
 
 .quantity-column {
     width: 105px;
-
     text-align: center !important;
 }
 
-
 .price-column {
     width: 155px;
-
     text-align: right !important;
 }
-
 
 .amount-column {
     width: 160px;
-
     text-align: right !important;
 }
 
-
 .money-cell {
     text-align: right;
-
     font-weight: 600;
 }
-
 
 .special-row td {
     background: #fafafa;
 }
 
-
-.special-row td:first-child {
-    font-weight: 500;
-}
-
-
 .total-row td {
     background: #dce6f4;
-
     color: #173c70;
-
     font-weight: bold;
-
     font-size: 17px;
-
     padding: 13px 8px;
 }
-
 
 .total-row td:last-child {
     text-align: right;
 }
 
-
-
-/* =========================================================
-   TERMS
-========================================================= */
-
 .terms-section {
     margin-top: 25px;
 }
 
-
 .terms-section ul {
-    margin:
-        5px 0 12px 22px;
+    margin: 5px 0 12px 22px;
 }
-
 
 .terms-section li {
     margin-bottom: 5px;
 }
 
-
 .standard-terms p {
     font-size: 13px;
-
     margin: 4px 0;
 }
 
-
-
-/* =========================================================
-   DOCUMENT FOOTER
-========================================================= */
-
 .document-footer {
     margin-top: 35px;
-
     padding-top: 18px;
-
-    border-top:
-        1px solid #c7c7c7;
-
+    border-top: 1px solid #c7c7c7;
     display: flex;
-
     justify-content: space-between;
-
     gap: 30px;
-
     font-size: 13px;
-
     color: #555;
 }
 
-
 .signature-box {
     min-width: 190px;
-
     text-align: center;
 }
 
-
 .signature-line {
     height: 35px;
-
-    border-bottom:
-        1px solid #555;
-
+    border-bottom: 1px solid #555;
     margin-top: 5px;
 }
 
-
-
-/* =========================================================
-   ACTIONS
-========================================================= */
-
 .quotation-actions {
     display: flex;
-
     justify-content: center;
-
     gap: 15px;
-
     margin-top: 25px;
-
     flex-wrap: wrap;
 }
-
-
-
-/* =========================================================
-   CONTACT
-========================================================= */
 
 .contact-section {
     background: white;
 }
 
-
 .contact-grid {
     max-width: 1000px;
-
     margin: auto;
-
     display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
+    grid-template-columns: repeat(3, 1fr);
     gap: 25px;
 }
 
-
 .contact-card {
     padding: 30px;
-
     text-align: center;
-
     background: #f5f8fb;
-
     border-radius: 12px;
 }
 
-
 .contact-card h3 {
     color: #1556a8;
-
     margin-bottom: 10px;
 }
 
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
 footer {
     background: #062a45;
-
     color: white;
-
     padding: 30px;
-
     text-align: center;
 }
-
-
-
-/* =========================================================
-   PRINT
-========================================================= */
 
 @media print {
 
@@ -2294,87 +1871,50 @@ footer {
         margin: 10mm;
     }
 
-
     body {
         background: white !important;
     }
 
-
     body * {
         visibility: hidden;
     }
-
 
     #quotationDocument,
     #quotationDocument * {
         visibility: visible;
     }
 
-
     #quotationDocument {
         position: absolute;
-
         left: 0;
         top: 0;
-
         width: 100%;
-
         max-width: none;
-
         padding: 0;
-
         margin: 0;
-
         box-shadow: none;
     }
-
 
     .quotation-actions {
         display: none !important;
     }
 
-
     .quotation-result {
         background: white;
-
         padding: 0;
-
         margin: 0;
     }
-
-
-    .document-top {
-        break-inside: avoid;
-    }
-
-
-    .quotation-table {
-        break-inside: auto;
-    }
-
 
     .quotation-table tr {
         break-inside: avoid;
         page-break-inside: avoid;
     }
 
-
-    .terms-section {
-        break-inside: avoid;
-    }
-
-
+    .terms-section,
     .document-footer {
         break-inside: avoid;
     }
-
 }
-
-
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
 
 @media (max-width: 900px) {
 
@@ -2382,52 +1922,41 @@ footer {
         flex-direction: column;
     }
 
-
     nav {
         flex-wrap: wrap;
-
         justify-content: center;
     }
-
 
     .hero h2 {
         font-size: 38px;
     }
-
 
     .services-grid,
     .contact-grid {
         grid-template-columns: 1fr;
     }
 
-
     .form-grid {
         grid-template-columns: 1fr;
     }
 
-
     .items-form {
         overflow-x: auto;
     }
-
 
     .items-header,
     .item-row {
         min-width: 850px;
     }
 
-
     .document-top {
         flex-direction: column;
     }
 
-
     .document-reference {
         text-align: left;
     }
-
 }
-
 
 @media (max-width: 600px) {
 
@@ -2437,88 +1966,65 @@ footer {
         padding: 55px 5%;
     }
 
-
     .hero {
         min-height: 500px;
     }
-
 
     .hero h2 {
         font-size: 32px;
     }
 
-
     .hero p {
         font-size: 17px;
     }
-
 
     #quotationForm {
         padding: 20px;
     }
 
-
     #quotationDocument {
         padding: 20px;
     }
-
 
     .document-company h1 {
         font-size: 17px;
     }
 
-
     .document-reference {
         min-width: 0;
     }
 
-
     .detail-row {
-        grid-template-columns:
-            120px
-            20px
-            1fr;
-
+        grid-template-columns: 120px 20px 1fr;
         font-size: 12px;
     }
-
 
     .quotation-table {
         font-size: 10px;
     }
-
 
     .quotation-table th,
     .quotation-table td {
         padding: 7px 4px;
     }
 
-
     .document-footer {
         flex-direction: column;
     }
-
 }
 """,
 
+    # --------------------------------------------------------
+    # JAVASCRIPT
+    # --------------------------------------------------------
 
+    "app.js": r"""
+document.addEventListener("DOMContentLoaded", function () {
 
-"app.js": r"""/* =========================================================
-   KENYA BOREHOLES SERVICES
-   QUOTATION SYSTEM
-========================================================= */
+    const quotationForm =
+        document.getElementById("quotationForm");
 
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-
-
-        const quotationForm =
-            document.getElementById(
-                "quotationForm"
-            );
-
+    if (quotationForm) {
 
         quotationForm.addEventListener(
             "submit",
@@ -2531,63 +2037,40 @@ document.addEventListener(
             }
         );
 
+    }
 
-        // Recalculate amounts when quantity or price changes
+    document.addEventListener(
+        "input",
+        function (event) {
 
-        document.addEventListener(
-            "input",
-            function (event) {
+            if (
+                event.target.classList.contains("item-quantity") ||
+                event.target.classList.contains("item-price")
+            ) {
 
-                if (
-                    event.target.classList.contains(
-                        "item-quantity"
-                    )
-                    ||
-                    event.target.classList.contains(
-                        "item-price"
-                    )
-                ) {
-
-                    calculateItemAmount(
-                        event.target.closest(
-                            ".item-row"
-                        )
-                    );
-
-                }
+                calculateItemAmount(
+                    event.target.closest(".item-row")
+                );
 
             }
-        );
 
+        }
+    );
 
-        calculateAllItems();
+    calculateAllItems();
 
-    }
-);
+});
 
-
-
-/* =========================================================
-   ADD ITEM
-========================================================= */
 
 function addItem() {
 
     const container =
-        document.getElementById(
-            "itemsContainer"
-        );
-
+        document.getElementById("itemsContainer");
 
     const row =
-        document.createElement(
-            "div"
-        );
+        document.createElement("div");
 
-
-    row.className =
-        "item-row";
-
+    row.className = "item-row";
 
     row.innerHTML = `
 
@@ -2630,38 +2113,22 @@ function addItem() {
         >
             ×
         </button>
-
     `;
-
 
     container.appendChild(row);
 
-
-    row
-        .querySelector(".item-description")
-        .focus();
+    row.querySelector(".item-description").focus();
 
 }
 
 
-
-/* =========================================================
-   REMOVE ITEM
-========================================================= */
-
 function removeItem(button) {
 
     const container =
-        document.getElementById(
-            "itemsContainer"
-        );
-
+        document.getElementById("itemsContainer");
 
     const rows =
-        container.querySelectorAll(
-            ".item-row"
-        );
-
+        container.querySelectorAll(".item-row");
 
     if (rows.length <= 1) {
 
@@ -2670,24 +2137,14 @@ function removeItem(button) {
         );
 
         return;
-
     }
 
-
-    button
-        .closest(".item-row")
-        .remove();
-
+    button.closest(".item-row").remove();
 
     calculateAllItems();
 
 }
 
-
-
-/* =========================================================
-   CALCULATE ITEM
-========================================================= */
 
 function calculateItemAmount(row) {
 
@@ -2695,182 +2152,96 @@ function calculateItemAmount(row) {
         return 0;
     }
 
-
     const quantity =
         Number(
-            row.querySelector(
-                ".item-quantity"
-            ).value
+            row.querySelector(".item-quantity").value
         ) || 0;
-
 
     const price =
         Number(
-            row.querySelector(
-                ".item-price"
-            ).value
+            row.querySelector(".item-price").value
         ) || 0;
-
 
     const amount =
         quantity * price;
 
-
-    row.querySelector(
-        ".item-amount"
-    ).value =
+    row.querySelector(".item-amount").value =
         formatCurrency(amount);
-
 
     return amount;
 
 }
 
 
-
-/* =========================================================
-   CALCULATE ALL ITEMS
-========================================================= */
-
 function calculateAllItems() {
 
     const rows =
-        document.querySelectorAll(
-            ".item-row"
-        );
-
+        document.querySelectorAll(".item-row");
 
     let total = 0;
 
+    rows.forEach(function (row) {
 
-    rows.forEach(
-        function (row) {
+        total += calculateItemAmount(row);
 
-            total +=
-                calculateItemAmount(
-                    row
-                );
-
-        }
-    );
-
+    });
 
     return total;
 
 }
 
 
-
-/* =========================================================
-   GENERATE QUOTATION
-========================================================= */
-
 function generateQuotation() {
 
-
     const name =
-        document.getElementById(
-            "customerName"
-        ).value.trim();
-
+        document.getElementById("customerName").value.trim();
 
     const phone =
-        document.getElementById(
-            "phone"
-        ).value.trim();
-
+        document.getElementById("phone").value.trim();
 
     const email =
-        document.getElementById(
-            "email"
-        ).value.trim();
-
+        document.getElementById("email").value.trim();
 
     const location =
-        document.getElementById(
-            "location"
-        ).value.trim();
-
+        document.getElementById("location").value.trim();
 
     const service =
-        document.getElementById(
-            "service"
-        ).value;
-
+        document.getElementById("service").value;
 
     const capacity =
-        document.getElementById(
-            "capacity"
-        ).value.trim();
-
-
-    const projectDate =
-        document.getElementById(
-            "projectDate"
-        ).value;
-
+        document.getElementById("capacity").value.trim();
 
     const validity =
-        document.getElementById(
-            "validity"
-        ).value.trim()
-        ||
+        document.getElementById("validity").value.trim() ||
         "30 Days";
-
 
     const labour =
         Number(
-            document.getElementById(
-                "labour"
-            ).value
+            document.getElementById("labour").value
         ) || 0;
-
 
     const transport =
         Number(
-            document.getElementById(
-                "transport"
-            ).value
+            document.getElementById("transport").value
         ) || 0;
 
-
     const notes =
-        document.getElementById(
-            "notes"
-        ).value.trim();
+        document.getElementById("notes").value.trim();
 
 
-
-    /* =====================================================
-       QUOTATION NUMBER
-    ===================================================== */
-
-    const now =
-        new Date();
-
+    const now = new Date();
 
     const year =
         now.getFullYear();
 
-
     const month =
-        String(
-            now.getMonth() + 1
-        ).padStart(2, "0");
-
+        String(now.getMonth() + 1).padStart(2, "0");
 
     const day =
-        String(
-            now.getDate()
-        ).padStart(2, "0");
-
+        String(now.getDate()).padStart(2, "0");
 
     const random =
-        Math.floor(
-            1000 +
-            Math.random() * 9000
-        );
-
+        Math.floor(1000 + Math.random() * 9000);
 
     const quotationNumber =
         "KBS/" +
@@ -2881,11 +2252,6 @@ function generateQuotation() {
         "/" +
         random;
 
-
-
-    /* =====================================================
-       DATE
-    ===================================================== */
 
     const quotationDate =
         now.toLocaleDateString(
@@ -2898,166 +2264,126 @@ function generateQuotation() {
         );
 
 
+    document.getElementById("quotationNumber")
+        .textContent = quotationNumber;
 
-    /* =====================================================
-       CUSTOMER DETAILS
-    ===================================================== */
+    document.getElementById("quotationDate")
+        .textContent = quotationDate;
 
-    document.getElementById(
-        "quotationNumber"
-    ).textContent =
-        quotationNumber;
+    document.getElementById("resultName")
+        .textContent = name;
 
+    document.getElementById("resultPhone")
+        .textContent = phone;
 
-    document.getElementById(
-        "quotationDate"
-    ).textContent =
-        quotationDate;
+    document.getElementById("resultEmail")
+        .textContent = email || "Not provided";
 
+    document.getElementById("resultLocation")
+        .textContent = location;
 
-    document.getElementById(
-        "resultName"
-    ).textContent =
-        name;
+    document.getElementById("resultService")
+        .textContent = service;
 
+    document.getElementById("resultCapacity")
+        .textContent = capacity || "Not specified";
 
-    document.getElementById(
-        "resultPhone"
-    ).textContent =
-        phone;
-
-
-    document.getElementById(
-        "resultEmail"
-    ).textContent =
-        email ||
-        "Not provided";
-
-
-    document.getElementById(
-        "resultLocation"
-    ).textContent =
-        location;
-
-
-    document.getElementById(
-        "resultService"
-    ).textContent =
-        service;
-
-
-    document.getElementById(
-        "resultCapacity"
-    ).textContent =
-        capacity ||
-        "Not specified";
-
-
-
-    /* =====================================================
-       ITEMS
-    ===================================================== */
 
     const rows =
-        document.querySelectorAll(
-            ".item-row"
-        );
-
+        document.querySelectorAll(".item-row");
 
     const quotationItems =
-        document.getElementById(
-            "quotationItems"
-        );
-
+        document.getElementById("quotationItems");
 
     quotationItems.innerHTML = "";
 
-
     let materialsTotal = 0;
-
 
     let itemNumber = 1;
 
 
-    rows.forEach(
-        function (row) {
+    rows.forEach(function (row) {
 
-            const description =
-                row.querySelector(
-                    ".item-description"
-                ).value.trim();
+        const description =
+            row.querySelector(".item-description")
+                .value.trim();
 
+        const quantity =
+            Number(
+                row.querySelector(".item-quantity").value
+            ) || 0;
 
-            const quantity =
-                Number(
-                    row.querySelector(
-                        ".item-quantity"
-                    ).value
-                ) || 0;
+        const price =
+            Number(
+                row.querySelector(".item-price").value
+            ) || 0;
 
+        const amount =
+            quantity * price;
 
-            const price =
-                Number(
-                    row.querySelector(
-                        ".item-price"
-                    ).value
-                ) || 0;
+        materialsTotal += amount;
 
 
-            const amount =
-                quantity * price;
+        const tableRow =
+            document.createElement("tr");
 
 
-            materialsTotal +=
-                amount;
+        const noCell =
+            document.createElement("td");
+
+        noCell.className = "no-column";
+        noCell.textContent = itemNumber;
 
 
-            const tableRow =
-                document.createElement(
-                    "tr"
-                );
+        const descriptionCell =
+            document.createElement("td");
+
+        descriptionCell.textContent =
+            description;
 
 
-            tableRow.innerHTML = `
+        const quantityCell =
+            document.createElement("td");
 
-                <td class="no-column">
-                    ${itemNumber}
-                </td>
+        quantityCell.className =
+            "quantity-column";
 
-                <td>
-                    ${escapeHTML(description)}
-                </td>
-
-                <td class="quantity-column">
-                    ${quantity}
-                </td>
-
-                <td class="price-column">
-                    ${formatCurrency(price)}
-                </td>
-
-                <td class="amount-column">
-                    ${formatCurrency(amount)}
-                </td>
-
-            `;
+        quantityCell.textContent =
+            quantity;
 
 
-            quotationItems.appendChild(
-                tableRow
-            );
+        const priceCell =
+            document.createElement("td");
+
+        priceCell.className =
+            "price-column";
+
+        priceCell.textContent =
+            formatCurrency(price);
 
 
-            itemNumber++;
+        const amountCell =
+            document.createElement("td");
 
-        }
-    );
+        amountCell.className =
+            "amount-column";
+
+        amountCell.textContent =
+            formatCurrency(amount);
 
 
+        tableRow.appendChild(noCell);
+        tableRow.appendChild(descriptionCell);
+        tableRow.appendChild(quantityCell);
+        tableRow.appendChild(priceCell);
+        tableRow.appendChild(amountCell);
 
-    /* =====================================================
-       TOTAL
-    ===================================================== */
+        quotationItems.appendChild(tableRow);
+
+        itemNumber++;
+
+    });
+
 
     const grandTotal =
         materialsTotal +
@@ -3065,119 +2391,65 @@ function generateQuotation() {
         transport;
 
 
-    document.getElementById(
-        "resultLabour"
-    ).textContent =
-        formatCurrency(
-            labour
-        );
+    document.getElementById("resultLabour")
+        .textContent =
+        formatCurrency(labour);
 
+    document.getElementById("resultTransport")
+        .textContent =
+        formatCurrency(transport);
 
-    document.getElementById(
-        "resultTransport"
-    ).textContent =
-        formatCurrency(
-            transport
-        );
+    document.getElementById("grandTotal")
+        .textContent =
+        "KES " + formatCurrency(grandTotal);
 
-
-    document.getElementById(
-        "grandTotal"
-    ).textContent =
-        "KES " +
-        formatCurrency(
-            grandTotal
-        );
-
-
-
-    /* =====================================================
-       NOTES
-    ===================================================== */
 
     const notesList =
-        document.getElementById(
-            "resultNotesList"
-        );
-
+        document.getElementById("resultNotesList");
 
     notesList.innerHTML = "";
 
 
     if (notes) {
 
-        const customNotes =
-            notes.split("\n");
+        notes.split("\n").forEach(function (note) {
 
+            if (note.trim()) {
 
-        customNotes.forEach(
-            function (note) {
+                const li =
+                    document.createElement("li");
 
-                if (note.trim()) {
+                li.textContent =
+                    note.trim();
 
-                    const li =
-                        document.createElement(
-                            "li"
-                        );
-
-                    li.textContent =
-                        note.trim();
-
-                    notesList.appendChild(
-                        li
-                    );
-
-                }
+                notesList.appendChild(li);
 
             }
-        );
+
+        });
 
     }
 
 
-
-    /* =====================================================
-       VALIDITY
-    ===================================================== */
-
-    document.getElementById(
-        "validityText"
-    ).textContent =
+    document.getElementById("validityText")
+        .textContent =
         "• This quotation is valid for " +
         validity +
         ".";
 
 
-
-    /* =====================================================
-       SHOW DOCUMENT
-    ===================================================== */
-
     const result =
-        document.getElementById(
-            "quotationResult"
-        );
+        document.getElementById("quotationResult");
 
+    result.classList.remove("hidden");
 
-    result.classList.remove(
-        "hidden"
-    );
-
-
-    result.scrollIntoView(
-        {
-            behavior: "smooth",
-            block: "start"
-        }
-    );
+    result.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
 
 }
 
-
-
-/* =========================================================
-   CURRENCY
-========================================================= */
 
 function formatCurrency(amount) {
 
@@ -3187,39 +2459,10 @@ function formatCurrency(amount) {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
         }
-    ).format(
-        Number(amount) || 0
-    );
+    ).format(Number(amount) || 0);
 
 }
 
-
-
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
-function escapeHTML(value) {
-
-    const div =
-        document.createElement(
-            "div"
-        );
-
-
-    div.textContent =
-        value;
-
-
-    return div.innerHTML;
-
-}
-
-
-
-/* =========================================================
-   PRINT QUOTATION
-========================================================= */
 
 function printQuotation() {
 
@@ -3228,55 +2471,27 @@ function printQuotation() {
 }
 
 
-
-/* =========================================================
-   EDIT QUOTATION
-========================================================= */
-
 function editQuotation() {
 
-    document.getElementById(
-        "quotationForm"
-    ).scrollIntoView(
-        {
+    document.getElementById("quotationForm")
+        .scrollIntoView({
             behavior: "smooth"
-        }
-    );
+        });
 
 }
 
 
-
-/* =========================================================
-   DOWNLOAD QUOTATION PDF
-========================================================= */
-
 function downloadQuotationPDF() {
 
-
     const quotation =
-        document.getElementById(
-            "quotationDocument"
-        );
-
+        document.getElementById("quotationDocument");
 
     const quotationNumber =
-        document.getElementById(
-            "quotationNumber"
-        ).textContent;
-
-
-    const customerName =
-        document.getElementById(
-            "resultName"
-        ).textContent;
-
+        document.getElementById("quotationNumber")
+            .textContent;
 
     const printWindow =
-        window.open(
-            "",
-            "_blank"
-        );
+        window.open("", "_blank");
 
 
     if (!printWindow) {
@@ -3288,12 +2503,6 @@ function downloadQuotationPDF() {
         return;
 
     }
-
-
-
-    const documentHTML =
-        quotation.innerHTML;
-
 
 
     printWindow.document.open();
@@ -3313,397 +2522,211 @@ function downloadQuotationPDF() {
                 Quotation ${quotationNumber}
             </title>
 
-
             <style>
 
                 @page {
-
                     size: A4;
-
                     margin: 10mm;
-
                 }
-
 
                 * {
-
                     box-sizing: border-box;
-
                 }
-
 
                 body {
-
                     margin: 0;
-
                     padding: 0;
-
-                    font-family:
-                        Arial,
-                        Helvetica,
-                        sans-serif;
-
+                    font-family: Arial, Helvetica, sans-serif;
                     color: #202020;
-
                     background: white;
-
                     font-size: 13px;
-
                 }
-
 
                 #quotationDocument {
-
                     width: 100%;
-
                     padding: 0;
-
                     background: white;
-
                 }
-
 
                 .document-top {
-
                     display: flex;
-
                     justify-content: space-between;
-
                     align-items: flex-start;
-
                     gap: 25px;
-
                 }
-
 
                 .document-company {
-
                     display: flex;
-
                     align-items: center;
-
                     gap: 12px;
-
                 }
-
 
                 .document-logo {
-
                     width: 55px;
-
                     height: 55px;
-
                     background: #1556a8;
-
                     color: white;
-
                     display: flex;
-
                     align-items: center;
-
                     justify-content: center;
-
                     font-weight: bold;
-
                     border-radius: 4px;
-
                 }
-
 
                 .document-company h1 {
-
                     margin: 0;
-
                     color: #1556a8;
-
                     font-size: 20px;
-
                 }
-
 
                 .document-company p {
-
                     margin: 2px 0;
-
                     color: #666;
-
                 }
-
 
                 .document-reference {
-
                     text-align: right;
-
                 }
-
 
                 .document-reference h2 {
-
                     margin: 0 0 7px;
-
                     font-size: 20px;
-
                 }
-
 
                 .document-reference p {
-
                     margin: 3px 0;
-
                 }
-
 
                 .document-line {
-
                     height: 2px;
-
                     background: #183e73;
-
                     margin: 15px 0 0;
-
                 }
-
 
                 .details-table {
-
                     margin-bottom: 20px;
-
                 }
-
 
                 .detail-row {
-
                     display: grid;
-
-                    grid-template-columns:
-                        175px
-                        22px
-                        1fr;
-
+                    grid-template-columns: 175px 22px 1fr;
                     min-height: 34px;
-
                     align-items: center;
-
-                    border-bottom:
-                        1px solid #d7d7d7;
-
+                    border-bottom: 1px solid #d7d7d7;
                 }
 
-
-                .detail-label {
-
-                    font-weight: bold;
-
-                }
-
-
+                .detail-label,
                 .detail-colon {
-
                     font-weight: bold;
-
                 }
-
 
                 .document-section-title {
-
                     color: #1556a8;
-
                     font-weight: bold;
-
                     font-size: 17px;
-
-                    margin:
-                        18px 0 8px;
-
+                    margin: 18px 0 8px;
                 }
-
 
                 .quotation-table {
-
                     width: 100%;
-
                     border-collapse: collapse;
-
                     font-size: 12px;
-
                 }
-
 
                 .quotation-table th {
-
                     background: #1556a8;
-
                     color: white;
-
-                    border:
-                        1px solid #8fa1b5;
-
+                    border: 1px solid #8fa1b5;
                     padding: 8px 6px;
-
                     text-align: left;
-
                 }
-
 
                 .quotation-table td {
-
-                    border:
-                        1px solid #c8c8c8;
-
+                    border: 1px solid #c8c8c8;
                     padding: 8px 6px;
-
                 }
-
 
                 .no-column {
-
                     width: 45px;
-
                     text-align: center;
-
                 }
-
 
                 .quantity-column {
-
                     width: 80px;
-
                     text-align: center;
-
                 }
-
 
                 .price-column {
-
                     width: 120px;
-
                     text-align: right;
-
                 }
-
 
                 .amount-column {
-
                     width: 125px;
-
                     text-align: right;
-
                 }
-
 
                 .money-cell {
-
                     text-align: right;
-
                 }
-
 
                 .special-row td {
-
                     background: #fafafa;
-
                 }
-
 
                 .total-row td {
-
                     background: #dce6f4;
-
                     color: #173c70;
-
                     font-weight: bold;
-
                     font-size: 14px;
-
                     padding: 10px 6px;
-
                 }
-
 
                 .total-row td:last-child {
-
                     text-align: right;
-
                 }
-
 
                 .terms-section {
-
                     margin-top: 20px;
-
                 }
-
 
                 .terms-section ul {
-
                     margin-top: 5px;
-
                     padding-left: 20px;
-
                 }
-
 
                 .terms-section li {
-
                     margin-bottom: 4px;
-
                 }
-
 
                 .standard-terms p {
-
                     margin: 3px 0;
-
                     font-size: 11px;
-
                 }
-
 
                 .document-footer {
-
                     margin-top: 25px;
-
                     padding-top: 12px;
-
-                    border-top:
-                        1px solid #c7c7c7;
-
+                    border-top: 1px solid #c7c7c7;
                     display: flex;
-
                     justify-content: space-between;
-
                 }
-
 
                 .signature-box {
-
                     width: 170px;
-
                     text-align: center;
-
                 }
-
 
                 .signature-line {
-
-                    border-bottom:
-                        1px solid #555;
-
+                    border-bottom: 1px solid #555;
                     height: 28px;
-
                 }
-
 
                 @media print {
 
                     body {
-
-                        -webkit-print-color-adjust:
-                            exact;
-
-                        print-color-adjust:
-                            exact;
-
+                        -webkit-print-color-adjust: exact;
+                        print-color-adjust: exact;
                     }
 
                 }
@@ -3712,12 +2735,11 @@ function downloadQuotationPDF() {
 
         </head>
 
-
         <body>
 
             <div id="quotationDocument">
 
-                ${documentHTML}
+                ${quotation.innerHTML}
 
             </div>
 
@@ -3731,51 +2753,29 @@ function downloadQuotationPDF() {
     printWindow.document.close();
 
 
+    setTimeout(function () {
 
-    setTimeout(
-        function () {
+        printWindow.focus();
 
-            printWindow.focus();
+        printWindow.print();
 
-            printWindow.print();
-
-        },
-        700
-    );
+    }, 700);
 
 }
 """,
 
-
-
-"README.txt": r"""============================================================
-KENYA BOREHOLES SERVICES WEBSITE
+    "README.txt": r"""
+============================================================
+KENYA BOREHOLES SERVICES
 ============================================================
 
-Professional borehole services website with a quotation
-generation system.
-
-FILES
-------------------------------------------------------------
-
-index.html
-Main website.
-
-styles.css
-Website styling and professional quotation styling.
-
-app.js
-Quotation generation, calculations, printing and PDF
-printing functionality.
-
-README.txt
-Project documentation.
+Flask-powered professional borehole services website.
 
 FEATURES
 ------------------------------------------------------------
 
 1. Professional home page
-2. Borehole drilling services
+2. Borehole drilling
 3. Water testing
 4. Pump installation
 5. Borehole maintenance
@@ -3783,121 +2783,45 @@ FEATURES
 7. Site survey
 8. Professional quotation form
 9. Multiple quotation items
-10. Automatic item calculations
-11. Labour & Service charges
-12. Transport & Logistics charges
+10. Automatic calculations
+11. Labour charges
+12. Transport charges
 13. Automatic quotation reference
-14. Automatic quotation date
-15. Customer details
-16. Project details
-17. Materials & Requirements table
-18. Total quotation
-19. Terms & Notes
-20. Print quotation
-21. Save quotation as PDF using browser Print > Save as PDF
-22. Responsive design
-23. Automatically opens in browser when app.py is run
-24. ZIP project generation
+14. Customer information
+15. Project information
+16. Professional quotation preview
+17. Print quotation
+18. Save quotation using browser PDF
+19. Responsive design
+20. Flask web server
+21. Render deployment support
+22. ZIP project generation
 
-QUOTATION DESIGN
+LOCAL RUN
 ------------------------------------------------------------
 
-The quotation has been designed using the supplied quotation
-example as the visual reference.
+Install dependencies:
 
-It contains:
+pip install -r requirements.txt
 
-KENYA BOREHOLES SERVICES
-
-QUOTATION
-
-Quotation Ref
-Date
-
-Client
-Location
-Contact
-Email
-Project / Service
-Capacity
-
-MATERIALS & REQUIREMENTS
-
-No.
-Description
-Quantity
-Unit Price (KES)
-Amount (KES)
-
-Labour & Borehole Servicing
-Transport & Logistics
-
-TOTAL QUOTATION
-
-TERMS & NOTES
-
-Authorized By
-
-PDF
-------------------------------------------------------------
-
-When the user clicks:
-
-Download Quotation PDF
-
-a separate quotation document opens in the browser print
-window.
-
-Choose:
-
-Save as PDF
-
-The resulting PDF contains the quotation only, rather than
-the whole website.
-
-OPENING THE WEBSITE
-------------------------------------------------------------
-
-Run:
+Then run:
 
 python app.py
 
-The program will:
+Open:
 
-1. Create index.html
-2. Create styles.css
-3. Create app.js
-4. Create README.txt
-5. Create Kenya_Boreholes_Services_Website.zip
-6. Open index.html automatically in the default browser
+http://127.0.0.1:5000
 
-You can also open index.html directly.
-
-VISUAL STUDIO CODE
+RENDER
 ------------------------------------------------------------
 
-Open the project folder in Visual Studio Code.
+Build Command:
 
-Install the Live Server extension.
+pip install -r requirements.txt
 
-Right-click:
+Start Command:
 
-index.html
-
-Then select:
-
-Open with Live Server
-
-The website will open in your browser.
-
-IMPORTANT
-------------------------------------------------------------
-
-The Python generator does not need Flask.
-
-It generates a static website.
-
-The quotation calculations are handled by JavaScript.
+gunicorn app:app
 
 ============================================================
 """
@@ -3905,160 +2829,175 @@ The quotation calculations are handled by JavaScript.
 
 
 # ============================================================
-# CREATE PROJECT DIRECTORY
+# CREATE FILES
 # ============================================================
 
-BASE_DIR.mkdir(
-    parents=True,
-    exist_ok=True
-)
+def create_project_files():
 
-
-# ============================================================
-# CREATE WEBSITE FILES
-# ============================================================
-
-print()
-print("Creating Kenya Boreholes Services Website...")
-print()
-
-
-for filename, content in files_to_create.items():
-
-    file_path = BASE_DIR / filename
-
-    file_path.write_text(
-        content,
-        encoding="utf-8"
+    BASE_DIR.mkdir(
+        parents=True,
+        exist_ok=True
     )
 
-    print(
-        f"Created: {file_path}"
-    )
+    print()
+    print("Creating Kenya Boreholes Services Website...")
+    print()
 
-
-# ============================================================
-# CREATE ZIP FILE
-# ============================================================
-
-if ZIP_PATH.exists():
-
-    ZIP_PATH.unlink()
-
-
-with zipfile.ZipFile(
-    ZIP_PATH,
-    "w",
-    zipfile.ZIP_DEFLATED
-) as archive:
-
-    for filename in files_to_create.keys():
+    for filename, content in files_to_create.items():
 
         file_path = BASE_DIR / filename
 
-        archive.write(
-            file_path,
-            arcname=filename
+        file_path.write_text(
+            content,
+            encoding="utf-8"
         )
 
         print(
-            f"Added to ZIP: {filename}"
+            f"Created: {file_path}"
         )
 
 
 # ============================================================
-# SUCCESS MESSAGE
+# CREATE ZIP
 # ============================================================
 
-print()
+def create_zip():
 
-print("=" * 65)
-print(
-    "KENYA BOREHOLES SERVICES WEBSITE"
-)
-print(
-    "PROJECT CREATED SUCCESSFULLY"
-)
-print("=" * 65)
+    if ZIP_PATH.exists():
+        ZIP_PATH.unlink()
 
-print(
-    f"Project location: {BASE_DIR}"
-)
+    with zipfile.ZipFile(
+        ZIP_PATH,
+        "w",
+        zipfile.ZIP_DEFLATED
+    ) as archive:
 
-print(
-    f"ZIP file created: {ZIP_PATH}"
-)
+        for filename in files_to_create.keys():
 
-print()
+            file_path = BASE_DIR / filename
 
-print(
-    "Files included:"
-)
+            archive.write(
+                file_path,
+                arcname=filename
+            )
 
-
-for filename in files_to_create.keys():
-
-    # ASCII only.
-    # Prevents Windows CP1252 UnicodeEncodeError.
-
-    print(
-        f"  [OK] {filename}"
-    )
-
-
-print()
-
-print("=" * 65)
-print(
-    "OPENING WEBSITE IN YOUR DEFAULT BROWSER..."
-)
-print("=" * 65)
-
-
-# ============================================================
-# OPEN WEBSITE AUTOMATICALLY
-# ============================================================
-
-index_file = BASE_DIR / "index.html"
-
-
-if index_file.exists():
-
-    browser_url = (
-        index_file
-        .resolve()
-        .as_uri()
-    )
+            print(
+                f"Added to ZIP: {filename}"
+            )
 
     print()
+    print(f"ZIP created: {ZIP_PATH}")
 
-    print(
-        f"Opening: {browser_url}"
+
+# ============================================================
+# FLASK ROUTES
+# ============================================================
+
+@app.route("/")
+def home():
+
+    return send_from_directory(
+        BASE_DIR,
+        "index.html"
     )
 
-    print()
 
-    time.sleep(1)
+@app.route("/styles.css")
+def styles():
+
+    return send_from_directory(
+        BASE_DIR,
+        "styles.css"
+    )
+
+
+@app.route("/app.js")
+def javascript():
+
+    return send_from_directory(
+        BASE_DIR,
+        "app.js"
+    )
+
+
+@app.route("/health")
+def health():
+
+    return {
+        "status": "ok",
+        "service": "Kenya Boreholes Services"
+    }
+
+
+@app.route("/download/project")
+def download_project():
+
+    create_project_files()
+    create_zip()
+
+    return send_from_directory(
+        BASE_DIR,
+        ZIP_PATH.name,
+        as_attachment=True
+    )
+
+
+# ============================================================
+# LOCAL BROWSER
+# ============================================================
+
+def open_browser():
 
     webbrowser.open(
-        browser_url
+        "http://127.0.0.1:5000"
     )
 
-else:
+
+# ============================================================
+# MAIN
+# ============================================================
+
+if __name__ == "__main__":
+
+    # Create the website files when running locally.
+    create_project_files()
 
     print()
+    print("=" * 65)
+    print("KENYA BOREHOLES SERVICES")
+    print("FLASK APPLICATION")
+    print("=" * 65)
 
-    print(
-        "ERROR: index.html was not created."
+    # Create ZIP locally.
+    create_zip()
+
+    print()
+    print("Website:")
+    print("http://127.0.0.1:5000")
+
+    print()
+    print("ZIP:")
+    print(ZIP_PATH)
+
+    print()
+    print("=" * 65)
+
+    # Open browser only when running locally.
+    threading.Timer(
+        1.0,
+        open_browser
+    ).start()
+
+    # Render supplies PORT.
+    port = int(
+        os.environ.get(
+            "PORT",
+            5000
+        )
     )
 
-    print()
-
-
-print("=" * 65)
-
-print(
-    "DONE"
-)
-
-print("=" * 65)
+    app.run(
+        host="0.0.0.0",
+        port=port,
+        debug=False
+    )
