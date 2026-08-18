@@ -1,15 +1,15 @@
 from pathlib import Path
 import zipfile
-import os
 import webbrowser
-import threading
+import time
+import os
 
 from flask import Flask, send_from_directory
 
 
 # ============================================================
-# KENYA BOREHOLES SERVICES
-# FLASK WEBSITE + PROJECT GENERATOR
+# KENYA BOREHOLES SERVICES WEBSITE
+# FLASK + STATIC WEBSITE
 # ============================================================
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -33,23 +33,21 @@ app = Flask(
 
 files_to_create = {
 
-    "index.html": r"""<!DOCTYPE html>
+"index.html": r"""<!DOCTYPE html>
 <html lang="en">
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Kenya Boreholes Services</title>
+<title>Kenya Boreholes Services</title>
 
-    <link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/styles.css">
 
 </head>
 
-
 <body>
-
 
 <header class="header">
 
@@ -71,7 +69,6 @@ files_to_create = {
 
     </div>
 
-
     <nav>
 
         <a href="#home">Home</a>
@@ -82,7 +79,6 @@ files_to_create = {
     </nav>
 
 </header>
-
 
 
 <section id="home" class="hero">
@@ -105,7 +101,6 @@ files_to_create = {
 
         </p>
 
-
         <div class="hero-buttons">
 
             <a
@@ -114,7 +109,6 @@ files_to_create = {
             >
                 Request Quotation
             </a>
-
 
             <a
                 href="#services"
@@ -130,7 +124,6 @@ files_to_create = {
 </section>
 
 
-
 <section id="services" class="section">
 
     <div class="section-title">
@@ -142,10 +135,8 @@ files_to_create = {
         </h2>
 
         <p>
-
             Professional and affordable water solutions
             for homes, farms, institutions and businesses.
-
         </p>
 
     </div>
@@ -165,15 +156,12 @@ files_to_create = {
             </h3>
 
             <p>
-
                 Professional borehole drilling services
                 using modern equipment and experienced
                 technicians.
-
             </p>
 
         </div>
-
 
 
         <div class="service-card">
@@ -187,15 +175,12 @@ files_to_create = {
             </h3>
 
             <p>
-
                 Laboratory water quality testing to determine
                 whether your borehole water is suitable
                 for use.
-
             </p>
 
         </div>
-
 
 
         <div class="service-card">
@@ -209,14 +194,11 @@ files_to_create = {
             </h3>
 
             <p>
-
                 Installation of reliable submersible,
                 solar and other pumping systems.
-
             </p>
 
         </div>
-
 
 
         <div class="service-card">
@@ -230,14 +212,11 @@ files_to_create = {
             </h3>
 
             <p>
-
                 Borehole inspection, pump repair,
                 servicing and maintenance.
-
             </p>
 
         </div>
-
 
 
         <div class="service-card">
@@ -251,14 +230,11 @@ files_to_create = {
             </h3>
 
             <p>
-
                 Water transportation and delivery services
                 for homes, construction sites and businesses.
-
             </p>
 
         </div>
-
 
 
         <div class="service-card">
@@ -272,26 +248,21 @@ files_to_create = {
             </h3>
 
             <p>
-
                 Professional site assessment and groundwater
                 survey before drilling.
-
             </p>
 
         </div>
-
 
     </div>
 
 </section>
 
 
-
 <section
     id="quotation"
     class="quotation-section"
 >
-
 
     <div class="section-title">
 
@@ -302,15 +273,11 @@ files_to_create = {
         </h2>
 
         <p>
-
             Enter your customer and project information
-            below. You can add multiple materials,
-            services and charges.
-
+            below.
         </p>
 
     </div>
-
 
 
     <div class="quotation-container">
@@ -321,9 +288,7 @@ files_to_create = {
 
             <div class="form-heading">
 
-                <span>
-                    01
-                </span>
+                <span>01</span>
 
                 <div>
 
@@ -338,7 +303,6 @@ files_to_create = {
                 </div>
 
             </div>
-
 
 
             <div class="form-grid">
@@ -360,7 +324,6 @@ files_to_create = {
                 </div>
 
 
-
                 <div class="form-group">
 
                     <label>
@@ -375,7 +338,6 @@ files_to_create = {
                     >
 
                 </div>
-
 
 
                 <div class="form-group">
@@ -393,7 +355,6 @@ files_to_create = {
                 </div>
 
 
-
                 <div class="form-group">
 
                     <label>
@@ -409,16 +370,12 @@ files_to_create = {
 
                 </div>
 
-
             </div>
-
 
 
             <div class="form-heading second-heading">
 
-                <span>
-                    02
-                </span>
+                <span>02</span>
 
                 <div>
 
@@ -435,7 +392,6 @@ files_to_create = {
             </div>
 
 
-
             <div class="form-grid">
 
 
@@ -445,10 +401,7 @@ files_to_create = {
                         Service / Project *
                     </label>
 
-                    <select
-                        id="service"
-                        required
-                    >
+                    <select id="service" required>
 
                         <option value="">
                             Select Service
@@ -495,7 +448,6 @@ files_to_create = {
                 </div>
 
 
-
                 <div class="form-group">
 
                     <label>
@@ -509,7 +461,6 @@ files_to_create = {
                     >
 
                 </div>
-
 
 
                 <div class="form-group">
@@ -526,7 +477,6 @@ files_to_create = {
                 </div>
 
 
-
                 <div class="form-group">
 
                     <label>
@@ -541,16 +491,12 @@ files_to_create = {
 
                 </div>
 
-
             </div>
-
 
 
             <div class="form-heading second-heading">
 
-                <span>
-                    03
-                </span>
+                <span>03</span>
 
                 <div>
 
@@ -559,13 +505,12 @@ files_to_create = {
                     </h3>
 
                     <p>
-                        Add all materials, labour and services.
+                        Add materials, labour and services.
                     </p>
 
                 </div>
 
             </div>
-
 
 
             <div class="items-form">
@@ -589,14 +534,12 @@ files_to_create = {
                         Amount (KES)
                     </div>
 
-                    <div>
-                    </div>
+                    <div></div>
 
                 </div>
 
 
                 <div id="itemsContainer">
-
 
                     <div class="item-row">
 
@@ -642,9 +585,7 @@ files_to_create = {
 
                     </div>
 
-
                 </div>
-
 
 
                 <button
@@ -652,14 +593,10 @@ files_to_create = {
                     class="add-item-btn"
                     onclick="addItem()"
                 >
-
                     + Add Another Item
-
                 </button>
 
-
             </div>
-
 
 
             <div class="form-grid extra-charges">
@@ -682,7 +619,6 @@ files_to_create = {
                 </div>
 
 
-
                 <div class="form-group">
 
                     <label>
@@ -699,9 +635,7 @@ files_to_create = {
 
                 </div>
 
-
             </div>
-
 
 
             <div class="form-group">
@@ -713,25 +647,20 @@ files_to_create = {
                 <textarea
                     id="notes"
                     rows="6"
-                    placeholder="Enter quotation terms, conditions, site requirements, payment terms or other notes..."
+                    placeholder="Enter quotation terms, conditions, payment terms or other notes..."
                 ></textarea>
 
             </div>
-
 
 
             <button
                 type="submit"
                 class="btn primary full-btn"
             >
-
                 Generate Professional Quotation
-
             </button>
 
-
         </form>
-
 
 
         <div
@@ -739,20 +668,15 @@ files_to_create = {
             class="quotation-result hidden"
         >
 
-
             <div id="quotationDocument">
-
 
                 <div class="document-top">
 
-
                     <div class="document-company">
-
 
                         <div class="document-logo">
                             KB
                         </div>
-
 
                         <div>
 
@@ -766,48 +690,34 @@ files_to_create = {
 
                         </div>
 
-
                     </div>
-
 
 
                     <div class="document-reference">
 
                         <h2>
-                            <span id="documentTitle">
-                                QUOTATION
-                            </span>
+                            QUOTATION
                         </h2>
 
                         <p>
-                            <strong>
-                                Quotation Ref:
-                            </strong>
-
+                            <strong>Quotation Ref:</strong>
                             <span id="quotationNumber"></span>
                         </p>
 
                         <p>
-                            <strong>
-                                Date:
-                            </strong>
-
+                            <strong>Date:</strong>
                             <span id="quotationDate"></span>
                         </p>
 
                     </div>
 
-
                 </div>
-
 
 
                 <div class="document-line"></div>
 
 
-
                 <div class="details-table">
-
 
                     <div class="detail-row">
 
@@ -815,14 +725,11 @@ files_to_create = {
                             Client
                         </div>
 
-                        <div class="detail-colon">
-                            :
-                        </div>
+                        <div>:</div>
 
                         <div id="resultName"></div>
 
                     </div>
-
 
 
                     <div class="detail-row">
@@ -831,14 +738,11 @@ files_to_create = {
                             Location
                         </div>
 
-                        <div class="detail-colon">
-                            :
-                        </div>
+                        <div>:</div>
 
                         <div id="resultLocation"></div>
 
                     </div>
-
 
 
                     <div class="detail-row">
@@ -847,14 +751,11 @@ files_to_create = {
                             Contact
                         </div>
 
-                        <div class="detail-colon">
-                            :
-                        </div>
+                        <div>:</div>
 
                         <div id="resultPhone"></div>
 
                     </div>
-
 
 
                     <div class="detail-row">
@@ -863,14 +764,11 @@ files_to_create = {
                             Email
                         </div>
 
-                        <div class="detail-colon">
-                            :
-                        </div>
+                        <div>:</div>
 
                         <div id="resultEmail"></div>
 
                     </div>
-
 
 
                     <div class="detail-row">
@@ -879,74 +777,48 @@ files_to_create = {
                             Project / Service
                         </div>
 
-                        <div class="detail-colon">
-                            :
-                        </div>
+                        <div>:</div>
 
                         <div id="resultService"></div>
 
                     </div>
 
 
-
-                    <div
-                        class="detail-row"
-                        id="capacityRow"
-                    >
+                    <div class="detail-row">
 
                         <div class="detail-label">
                             Capacity
                         </div>
 
-                        <div class="detail-colon">
-                            :
-                        </div>
+                        <div>:</div>
 
                         <div id="resultCapacity"></div>
 
                     </div>
 
-
                 </div>
-
 
 
                 <div class="document-section-title">
-
                     MATERIALS & REQUIREMENTS
-
                 </div>
 
 
-
-                <table
-                    class="quotation-table"
-                    id="quotationItemsTable"
-                >
+                <table class="quotation-table">
 
                     <thead>
 
                         <tr>
 
-                            <th class="no-column">
-                                No.
-                            </th>
+                            <th>No.</th>
 
-                            <th>
-                                Description
-                            </th>
+                            <th>Description</th>
 
-                            <th class="quantity-column">
-                                Quantity
-                            </th>
+                            <th>Quantity</th>
 
-                            <th class="price-column">
-                                Unit Price (KES)
-                            </th>
+                            <th>Unit Price (KES)</th>
 
-                            <th class="amount-column">
-                                Amount (KES)
-                            </th>
+                            <th>Amount (KES)</th>
 
                         </tr>
 
@@ -958,8 +830,7 @@ files_to_create = {
 
                     <tbody>
 
-
-                        <tr class="special-row">
+                        <tr>
 
                             <td colspan="4">
                                 Labour & Tank/Borehole Servicing
@@ -975,8 +846,7 @@ files_to_create = {
                         </tr>
 
 
-
-                        <tr class="special-row">
+                        <tr>
 
                             <td colspan="4">
                                 Transport & Logistics
@@ -991,9 +861,7 @@ files_to_create = {
 
                         </tr>
 
-
                     </tbody>
-
 
 
                     <tfoot>
@@ -1012,23 +880,16 @@ files_to_create = {
 
                     </tfoot>
 
-
                 </table>
-
 
 
                 <div class="terms-section">
 
-
                     <div class="document-section-title">
-
                         TERMS & NOTES
-
                     </div>
 
-
                     <ul id="resultNotesList"></ul>
-
 
                     <div class="standard-terms">
 
@@ -1038,19 +899,17 @@ files_to_create = {
                         </p>
 
                         <p>
-                            • Any additional repairs or materials
-                            required after inspection will be
-                            communicated and quoted separately.
+                            • Additional repairs or materials
+                            will be quoted separately.
                         </p>
 
                         <p>
                             • Prices are subject to confirmation
-                            before commencement of works.
+                            before commencement.
                         </p>
 
                         <p>
-                            • Site assessment may be required
-                            before final confirmation.
+                            • Site assessment may be required.
                         </p>
 
                         <p id="validityText">
@@ -1059,13 +918,10 @@ files_to_create = {
 
                     </div>
 
-
                 </div>
 
 
-
                 <div class="document-footer">
-
 
                     <div>
 
@@ -1090,16 +946,12 @@ files_to_create = {
 
                     </div>
 
-
                 </div>
-
 
             </div>
 
 
-
             <div class="quotation-actions">
-
 
                 <button
                     class="btn primary"
@@ -1108,16 +960,12 @@ files_to_create = {
                     Download Quotation PDF
                 </button>
 
-
-
                 <button
                     class="btn secondary"
                     onclick="printQuotation()"
                 >
                     Print Quotation
                 </button>
-
-
 
                 <button
                     class="btn outline-btn"
@@ -1126,23 +974,16 @@ files_to_create = {
                     Edit Quotation
                 </button>
 
-
             </div>
 
-
         </div>
-
 
     </div>
 
 </section>
 
 
-
-<section
-    id="contact"
-    class="contact-section"
->
+<section id="contact" class="contact-section">
 
     <div class="section-title">
 
@@ -1157,9 +998,7 @@ files_to_create = {
     </div>
 
 
-
     <div class="contact-grid">
-
 
         <div class="contact-card">
 
@@ -1172,7 +1011,6 @@ files_to_create = {
             </p>
 
         </div>
-
 
 
         <div class="contact-card">
@@ -1188,7 +1026,6 @@ files_to_create = {
         </div>
 
 
-
         <div class="contact-card">
 
             <h3>
@@ -1201,11 +1038,9 @@ files_to_create = {
 
         </div>
 
-
     </div>
 
 </section>
-
 
 
 <footer>
@@ -1218,7 +1053,6 @@ files_to_create = {
 </footer>
 
 
-
 <script src="/app.js"></script>
 
 </body>
@@ -1226,23 +1060,8 @@ files_to_create = {
 </html>
 """,
 
-    # --------------------------------------------------------
-    # KEEP YOUR EXISTING CSS
-    # --------------------------------------------------------
 
-    "styles.css": r"""
-/*
-KENYA BOREHOLES SERVICES
-Stylesheet
-*/
-
-/* Paste your existing styles.css here if it is already
-   present in the project.
-
-   The Flask application will automatically serve this file.
-*/
-
-* {
+"styles.css": r"""* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -1317,16 +1136,15 @@ nav a:hover {
 
 .hero {
     min-height: 580px;
-    background:
-        linear-gradient(
-            rgba(5, 41, 70, 0.84),
-            rgba(5, 41, 70, 0.84)
-        ),
-        linear-gradient(
-            135deg,
-            #1687e8,
-            #0d527e
-        );
+    background: linear-gradient(
+        rgba(5, 41, 70, 0.84),
+        rgba(5, 41, 70, 0.84)
+    ),
+    linear-gradient(
+        135deg,
+        #1687e8,
+        #0d527e
+    );
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1558,13 +1376,7 @@ textarea {
 .items-header,
 .item-row {
     display: grid;
-    grid-template-columns:
-        minmax(200px, 2fr)
-        120px
-        170px
-        170px
-        50px;
-    gap: 0;
+    grid-template-columns: minmax(200px, 2fr) 120px 170px 170px 50px;
     align-items: center;
 }
 
@@ -1709,8 +1521,7 @@ textarea {
     font-size: 15px;
 }
 
-.detail-label,
-.detail-colon {
+.detail-label {
     font-weight: bold;
 }
 
@@ -1745,33 +1556,29 @@ textarea {
     background: #fafafa;
 }
 
-.no-column {
+.quotation-table th:nth-child(1) {
     width: 55px;
-    text-align: center !important;
+    text-align: center;
 }
 
-.quantity-column {
+.quotation-table th:nth-child(3) {
     width: 105px;
-    text-align: center !important;
+    text-align: center;
 }
 
-.price-column {
+.quotation-table th:nth-child(4) {
     width: 155px;
-    text-align: right !important;
+    text-align: right;
 }
 
-.amount-column {
+.quotation-table th:nth-child(5) {
     width: 160px;
-    text-align: right !important;
+    text-align: right;
 }
 
 .money-cell {
     text-align: right;
     font-weight: 600;
-}
-
-.special-row td {
-    background: #fafafa;
 }
 
 .total-row td {
@@ -1904,16 +1711,6 @@ footer {
         padding: 0;
         margin: 0;
     }
-
-    .quotation-table tr {
-        break-inside: avoid;
-        page-break-inside: avoid;
-    }
-
-    .terms-section,
-    .document-footer {
-        break-inside: avoid;
-    }
 }
 
 @media (max-width: 900px) {
@@ -2014,17 +1811,13 @@ footer {
 }
 """,
 
-    # --------------------------------------------------------
-    # JAVASCRIPT
-    # --------------------------------------------------------
 
-    "app.js": r"""
-document.addEventListener("DOMContentLoaded", function () {
+"app.js": r"""document.addEventListener(
+    "DOMContentLoaded",
+    function () {
 
-    const quotationForm =
-        document.getElementById("quotationForm");
-
-    if (quotationForm) {
+        const quotationForm =
+            document.getElementById("quotationForm");
 
         quotationForm.addEventListener(
             "submit",
@@ -2037,29 +1830,33 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         );
 
-    }
+        document.addEventListener(
+            "input",
+            function (event) {
 
-    document.addEventListener(
-        "input",
-        function (event) {
+                if (
+                    event.target.classList.contains(
+                        "item-quantity"
+                    )
+                    ||
+                    event.target.classList.contains(
+                        "item-price"
+                    )
+                ) {
 
-            if (
-                event.target.classList.contains("item-quantity") ||
-                event.target.classList.contains("item-price")
-            ) {
+                    calculateItemAmount(
+                        event.target.closest(".item-row")
+                    );
 
-                calculateItemAmount(
-                    event.target.closest(".item-row")
-                );
+                }
 
             }
+        );
 
-        }
-    );
+        calculateAllItems();
 
-    calculateAllItems();
-
-});
+    }
+);
 
 
 function addItem() {
@@ -2117,7 +1914,9 @@ function addItem() {
 
     container.appendChild(row);
 
-    row.querySelector(".item-description").focus();
+    row.querySelector(
+        ".item-description"
+    ).focus();
 
 }
 
@@ -2139,7 +1938,9 @@ function removeItem(button) {
         return;
     }
 
-    button.closest(".item-row").remove();
+    button
+        .closest(".item-row")
+        .remove();
 
     calculateAllItems();
 
@@ -2165,11 +1966,12 @@ function calculateItemAmount(row) {
     const amount =
         quantity * price;
 
-    row.querySelector(".item-amount").value =
+    row.querySelector(
+        ".item-amount"
+    ).value =
         formatCurrency(amount);
 
     return amount;
-
 }
 
 
@@ -2180,68 +1982,95 @@ function calculateAllItems() {
 
     let total = 0;
 
-    rows.forEach(function (row) {
+    rows.forEach(
+        function (row) {
 
-        total += calculateItemAmount(row);
+            total += calculateItemAmount(row);
 
-    });
+        }
+    );
 
     return total;
-
 }
 
 
 function generateQuotation() {
 
     const name =
-        document.getElementById("customerName").value.trim();
+        document.getElementById(
+            "customerName"
+        ).value.trim();
 
     const phone =
-        document.getElementById("phone").value.trim();
+        document.getElementById(
+            "phone"
+        ).value.trim();
 
     const email =
-        document.getElementById("email").value.trim();
+        document.getElementById(
+            "email"
+        ).value.trim();
 
     const location =
-        document.getElementById("location").value.trim();
+        document.getElementById(
+            "location"
+        ).value.trim();
 
     const service =
-        document.getElementById("service").value;
+        document.getElementById(
+            "service"
+        ).value;
 
     const capacity =
-        document.getElementById("capacity").value.trim();
+        document.getElementById(
+            "capacity"
+        ).value.trim();
 
     const validity =
-        document.getElementById("validity").value.trim() ||
-        "30 Days";
+        document.getElementById(
+            "validity"
+        ).value.trim() || "30 Days";
 
     const labour =
         Number(
-            document.getElementById("labour").value
+            document.getElementById(
+                "labour"
+            ).value
         ) || 0;
 
     const transport =
         Number(
-            document.getElementById("transport").value
+            document.getElementById(
+                "transport"
+            ).value
         ) || 0;
 
     const notes =
-        document.getElementById("notes").value.trim();
+        document.getElementById(
+            "notes"
+        ).value.trim();
 
 
-    const now = new Date();
+    const now =
+        new Date();
 
     const year =
         now.getFullYear();
 
     const month =
-        String(now.getMonth() + 1).padStart(2, "0");
+        String(
+            now.getMonth() + 1
+        ).padStart(2, "0");
 
     const day =
-        String(now.getDate()).padStart(2, "0");
+        String(
+            now.getDate()
+        ).padStart(2, "0");
 
     const random =
-        Math.floor(1000 + Math.random() * 9000);
+        Math.floor(
+            1000 + Math.random() * 9000
+        );
 
     const quotationNumber =
         "KBS/" +
@@ -2264,36 +2093,54 @@ function generateQuotation() {
         );
 
 
-    document.getElementById("quotationNumber")
-        .textContent = quotationNumber;
+    document.getElementById(
+        "quotationNumber"
+    ).textContent =
+        quotationNumber;
 
-    document.getElementById("quotationDate")
-        .textContent = quotationDate;
+    document.getElementById(
+        "quotationDate"
+    ).textContent =
+        quotationDate;
 
-    document.getElementById("resultName")
-        .textContent = name;
+    document.getElementById(
+        "resultName"
+    ).textContent =
+        name;
 
-    document.getElementById("resultPhone")
-        .textContent = phone;
+    document.getElementById(
+        "resultPhone"
+    ).textContent =
+        phone;
 
-    document.getElementById("resultEmail")
-        .textContent = email || "Not provided";
+    document.getElementById(
+        "resultEmail"
+    ).textContent =
+        email || "Not provided";
 
-    document.getElementById("resultLocation")
-        .textContent = location;
+    document.getElementById(
+        "resultLocation"
+    ).textContent =
+        location;
 
-    document.getElementById("resultService")
-        .textContent = service;
+    document.getElementById(
+        "resultService"
+    ).textContent =
+        service;
 
-    document.getElementById("resultCapacity")
-        .textContent = capacity || "Not specified";
+    document.getElementById(
+        "resultCapacity"
+    ).textContent =
+        capacity || "Not specified";
 
 
     const rows =
         document.querySelectorAll(".item-row");
 
     const quotationItems =
-        document.getElementById("quotationItems");
+        document.getElementById(
+            "quotationItems"
+        );
 
     quotationItems.innerHTML = "";
 
@@ -2302,87 +2149,71 @@ function generateQuotation() {
     let itemNumber = 1;
 
 
-    rows.forEach(function (row) {
+    rows.forEach(
+        function (row) {
 
-        const description =
-            row.querySelector(".item-description")
-                .value.trim();
+            const description =
+                row.querySelector(
+                    ".item-description"
+                ).value.trim();
 
-        const quantity =
-            Number(
-                row.querySelector(".item-quantity").value
-            ) || 0;
+            const quantity =
+                Number(
+                    row.querySelector(
+                        ".item-quantity"
+                    ).value
+                ) || 0;
 
-        const price =
-            Number(
-                row.querySelector(".item-price").value
-            ) || 0;
+            const price =
+                Number(
+                    row.querySelector(
+                        ".item-price"
+                    ).value
+                ) || 0;
 
-        const amount =
-            quantity * price;
+            const amount =
+                quantity * price;
 
-        materialsTotal += amount;
-
-
-        const tableRow =
-            document.createElement("tr");
-
-
-        const noCell =
-            document.createElement("td");
-
-        noCell.className = "no-column";
-        noCell.textContent = itemNumber;
+            materialsTotal += amount;
 
 
-        const descriptionCell =
-            document.createElement("td");
-
-        descriptionCell.textContent =
-            description;
+            const tableRow =
+                document.createElement("tr");
 
 
-        const quantityCell =
-            document.createElement("td");
+            tableRow.innerHTML = `
 
-        quantityCell.className =
-            "quantity-column";
+                <td style="text-align:center;">
+                    ${itemNumber}
+                </td>
 
-        quantityCell.textContent =
-            quantity;
+                <td>
+                    ${escapeHTML(description)}
+                </td>
 
+                <td style="text-align:center;">
+                    ${quantity}
+                </td>
 
-        const priceCell =
-            document.createElement("td");
+                <td style="text-align:right;">
+                    ${formatCurrency(price)}
+                </td>
 
-        priceCell.className =
-            "price-column";
+                <td style="text-align:right;">
+                    ${formatCurrency(amount)}
+                </td>
 
-        priceCell.textContent =
-            formatCurrency(price);
-
-
-        const amountCell =
-            document.createElement("td");
-
-        amountCell.className =
-            "amount-column";
-
-        amountCell.textContent =
-            formatCurrency(amount);
+            `;
 
 
-        tableRow.appendChild(noCell);
-        tableRow.appendChild(descriptionCell);
-        tableRow.appendChild(quantityCell);
-        tableRow.appendChild(priceCell);
-        tableRow.appendChild(amountCell);
+            quotationItems.appendChild(
+                tableRow
+            );
 
-        quotationItems.appendChild(tableRow);
+            itemNumber++;
 
-        itemNumber++;
-
-    });
+        }
+    );
 
 
     const grandTotal =
@@ -2391,55 +2222,68 @@ function generateQuotation() {
         transport;
 
 
-    document.getElementById("resultLabour")
-        .textContent =
+    document.getElementById(
+        "resultLabour"
+    ).textContent =
         formatCurrency(labour);
 
-    document.getElementById("resultTransport")
-        .textContent =
+    document.getElementById(
+        "resultTransport"
+    ).textContent =
         formatCurrency(transport);
 
-    document.getElementById("grandTotal")
-        .textContent =
-        "KES " + formatCurrency(grandTotal);
+    document.getElementById(
+        "grandTotal"
+    ).textContent =
+        "KES " +
+        formatCurrency(grandTotal);
 
 
     const notesList =
-        document.getElementById("resultNotesList");
+        document.getElementById(
+            "resultNotesList"
+        );
 
     notesList.innerHTML = "";
 
 
     if (notes) {
 
-        notes.split("\n").forEach(function (note) {
+        notes
+            .split("\n")
+            .forEach(
+                function (note) {
 
-            if (note.trim()) {
+                    if (note.trim()) {
 
-                const li =
-                    document.createElement("li");
+                        const li =
+                            document.createElement("li");
 
-                li.textContent =
-                    note.trim();
+                        li.textContent =
+                            note.trim();
 
-                notesList.appendChild(li);
+                        notesList.appendChild(li);
 
-            }
+                    }
 
-        });
+                }
+            );
 
     }
 
 
-    document.getElementById("validityText")
-        .textContent =
+    document.getElementById(
+        "validityText"
+    ).textContent =
         "• This quotation is valid for " +
         validity +
         ".";
 
 
     const result =
-        document.getElementById("quotationResult");
+        document.getElementById(
+            "quotationResult"
+        );
 
     result.classList.remove("hidden");
 
@@ -2459,7 +2303,21 @@ function formatCurrency(amount) {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
         }
-    ).format(Number(amount) || 0);
+    ).format(
+        Number(amount) || 0
+    );
+
+}
+
+
+function escapeHTML(value) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent = value;
+
+    return div.innerHTML;
 
 }
 
@@ -2473,10 +2331,11 @@ function printQuotation() {
 
 function editQuotation() {
 
-    document.getElementById("quotationForm")
-        .scrollIntoView({
-            behavior: "smooth"
-        });
+    document.getElementById(
+        "quotationForm"
+    ).scrollIntoView({
+        behavior: "smooth"
+    });
 
 }
 
@@ -2484,14 +2343,21 @@ function editQuotation() {
 function downloadQuotationPDF() {
 
     const quotation =
-        document.getElementById("quotationDocument");
+        document.getElementById(
+            "quotationDocument"
+        );
 
     const quotationNumber =
-        document.getElementById("quotationNumber")
-            .textContent;
+        document.getElementById(
+            "quotationNumber"
+        ).textContent;
+
 
     const printWindow =
-        window.open("", "_blank");
+        window.open(
+            "",
+            "_blank"
+        );
 
 
     if (!printWindow) {
@@ -2501,7 +2367,6 @@ function downloadQuotationPDF() {
         );
 
         return;
-
     }
 
 
@@ -2536,16 +2401,13 @@ function downloadQuotationPDF() {
                 body {
                     margin: 0;
                     padding: 0;
-                    font-family: Arial, Helvetica, sans-serif;
+                    font-family:
+                        Arial,
+                        Helvetica,
+                        sans-serif;
                     color: #202020;
                     background: white;
                     font-size: 13px;
-                }
-
-                #quotationDocument {
-                    width: 100%;
-                    padding: 0;
-                    background: white;
                 }
 
                 .document-top {
@@ -2609,14 +2471,15 @@ function downloadQuotationPDF() {
 
                 .detail-row {
                     display: grid;
-                    grid-template-columns: 175px 22px 1fr;
+                    grid-template-columns:
+                        175px 22px 1fr;
                     min-height: 34px;
                     align-items: center;
-                    border-bottom: 1px solid #d7d7d7;
+                    border-bottom:
+                        1px solid #d7d7d7;
                 }
 
-                .detail-label,
-                .detail-colon {
+                .detail-label {
                     font-weight: bold;
                 }
 
@@ -2636,42 +2499,20 @@ function downloadQuotationPDF() {
                 .quotation-table th {
                     background: #1556a8;
                     color: white;
-                    border: 1px solid #8fa1b5;
+                    border:
+                        1px solid #8fa1b5;
                     padding: 8px 6px;
                     text-align: left;
                 }
 
                 .quotation-table td {
-                    border: 1px solid #c8c8c8;
+                    border:
+                        1px solid #c8c8c8;
                     padding: 8px 6px;
-                }
-
-                .no-column {
-                    width: 45px;
-                    text-align: center;
-                }
-
-                .quantity-column {
-                    width: 80px;
-                    text-align: center;
-                }
-
-                .price-column {
-                    width: 120px;
-                    text-align: right;
-                }
-
-                .amount-column {
-                    width: 125px;
-                    text-align: right;
                 }
 
                 .money-cell {
                     text-align: right;
-                }
-
-                .special-row td {
-                    background: #fafafa;
                 }
 
                 .total-row td {
@@ -2707,7 +2548,8 @@ function downloadQuotationPDF() {
                 .document-footer {
                     margin-top: 25px;
                     padding-top: 12px;
-                    border-top: 1px solid #c7c7c7;
+                    border-top:
+                        1px solid #c7c7c7;
                     display: flex;
                     justify-content: space-between;
                 }
@@ -2718,15 +2560,18 @@ function downloadQuotationPDF() {
                 }
 
                 .signature-line {
-                    border-bottom: 1px solid #555;
+                    border-bottom:
+                        1px solid #555;
                     height: 28px;
                 }
 
                 @media print {
 
                     body {
-                        -webkit-print-color-adjust: exact;
-                        print-color-adjust: exact;
+                        -webkit-print-color-adjust:
+                            exact;
+                        print-color-adjust:
+                            exact;
                     }
 
                 }
@@ -2737,11 +2582,7 @@ function downloadQuotationPDF() {
 
         <body>
 
-            <div id="quotationDocument">
-
-                ${quotation.innerHTML}
-
-            </div>
+            ${quotation.outerHTML}
 
         </body>
 
@@ -2753,91 +2594,27 @@ function downloadQuotationPDF() {
     printWindow.document.close();
 
 
-    setTimeout(function () {
+    setTimeout(
+        function () {
 
-        printWindow.focus();
+            printWindow.focus();
 
-        printWindow.print();
+            printWindow.print();
 
-    }, 700);
+        },
+        700
+    );
 
 }
-""",
-
-    "README.txt": r"""
-============================================================
-KENYA BOREHOLES SERVICES
-============================================================
-
-Flask-powered professional borehole services website.
-
-FEATURES
-------------------------------------------------------------
-
-1. Professional home page
-2. Borehole drilling
-3. Water testing
-4. Pump installation
-5. Borehole maintenance
-6. Water delivery
-7. Site survey
-8. Professional quotation form
-9. Multiple quotation items
-10. Automatic calculations
-11. Labour charges
-12. Transport charges
-13. Automatic quotation reference
-14. Customer information
-15. Project information
-16. Professional quotation preview
-17. Print quotation
-18. Save quotation using browser PDF
-19. Responsive design
-20. Flask web server
-21. Render deployment support
-22. ZIP project generation
-
-LOCAL RUN
-------------------------------------------------------------
-
-Install dependencies:
-
-pip install -r requirements.txt
-
-Then run:
-
-python app.py
-
-Open:
-
-http://127.0.0.1:5000
-
-RENDER
-------------------------------------------------------------
-
-Build Command:
-
-pip install -r requirements.txt
-
-Start Command:
-
-gunicorn app:app
-
-============================================================
 """
 }
 
 
 # ============================================================
-# CREATE FILES
+# CREATE WEBSITE FILES
 # ============================================================
 
 def create_project_files():
-
-    BASE_DIR.mkdir(
-        parents=True,
-        exist_ok=True
-    )
 
     print()
     print("Creating Kenya Boreholes Services Website...")
@@ -2864,7 +2641,9 @@ def create_project_files():
 def create_zip():
 
     if ZIP_PATH.exists():
+
         ZIP_PATH.unlink()
+
 
     with zipfile.ZipFile(
         ZIP_PATH,
@@ -2884,9 +2663,6 @@ def create_zip():
             print(
                 f"Added to ZIP: {filename}"
             )
-
-    print()
-    print(f"ZIP created: {ZIP_PATH}")
 
 
 # ============================================================
@@ -2929,72 +2705,85 @@ def health():
     }
 
 
-@app.route("/download/project")
-def download_project():
-
-    create_project_files()
-    create_zip()
-
-    return send_from_directory(
-        BASE_DIR,
-        ZIP_PATH.name,
-        as_attachment=True
-    )
-
-
 # ============================================================
-# LOCAL BROWSER
-# ============================================================
-
-def open_browser():
-
-    webbrowser.open(
-        "http://127.0.0.1:5000"
-    )
-
-
-# ============================================================
-# MAIN
+# CREATE PROJECT WHEN RUN DIRECTLY
 # ============================================================
 
 if __name__ == "__main__":
 
-    # Create the website files when running locally.
     create_project_files()
 
-    print()
-    print("=" * 65)
-    print("KENYA BOREHOLES SERVICES")
-    print("FLASK APPLICATION")
-    print("=" * 65)
-
-    # Create ZIP locally.
     create_zip()
 
     print()
-    print("Website:")
-    print("http://127.0.0.1:5000")
+    print("=" * 65)
+    print("KENYA BOREHOLES SERVICES WEBSITE")
+    print("PROJECT CREATED SUCCESSFULLY")
+    print("=" * 65)
+
+    print(
+        f"Project location: {BASE_DIR}"
+    )
+
+    print(
+        f"ZIP file created: {ZIP_PATH}"
+    )
 
     print()
-    print("ZIP:")
-    print(ZIP_PATH)
+    print("Files included:")
+
+    for filename in files_to_create.keys():
+
+        print(
+            f"  [OK] {filename}"
+        )
 
     print()
     print("=" * 65)
+    print("STARTING WEBSITE...")
+    print("=" * 65)
 
-    # Open browser only when running locally.
-    threading.Timer(
-        1.0,
-        open_browser
-    ).start()
 
-    # Render supplies PORT.
+    # Only open browser when running locally.
+    # Render has no desktop browser.
+
+    if os.environ.get("RENDER"):
+
+        print(
+            "Running on Render - browser opening disabled."
+        )
+
+    else:
+
+        index_file =
+            BASE_DIR / "index.html"
+
+        if index_file.exists():
+
+            browser_url = (
+                index_file
+                .resolve()
+                .as_uri()
+            )
+
+            print(
+                f"Opening: {browser_url}"
+            )
+
+            time.sleep(1)
+
+            webbrowser.open(
+                browser_url
+            )
+
+
     port = int(
         os.environ.get(
             "PORT",
-            5000
+            "5000"
         )
     )
+
 
     app.run(
         host="0.0.0.0",
