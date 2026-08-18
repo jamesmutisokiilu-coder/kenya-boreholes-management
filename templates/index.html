@@ -1,35 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kenya Boreholes Services</title>
 
-    <title>Kenya Boreholes Services</title>
+<style>
 
-    <link rel="stylesheet" href="styles.css">
+/* =========================================================
+   GLOBAL
+========================================================= */
 
-</head>
-
-    <style>
-        * {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-
 html {
     scroll-behavior: smooth;
 }
-
 
 body {
     font-family: Arial, Helvetica, sans-serif;
     background: #f4f7fa;
     color: #17212b;
     line-height: 1.6;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
 }
 
 
@@ -44,20 +48,18 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 30px;
+    gap: 25px;
     position: sticky;
     top: 0;
     z-index: 1000;
     box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
 
-
 .logo {
     display: flex;
     align-items: center;
     gap: 12px;
 }
-
 
 .logo-icon {
     width: 48px;
@@ -71,23 +73,21 @@ body {
     font-weight: bold;
 }
 
-
 .logo h1 {
     font-size: 20px;
 }
-
 
 .logo p {
     color: #687582;
     font-size: 12px;
 }
 
-
 nav {
     display: flex;
-    gap: 25px;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
-
 
 nav a {
     text-decoration: none;
@@ -95,11 +95,9 @@ nav a {
     font-weight: 600;
 }
 
-
 nav a:hover {
     color: #1556a8;
 }
-
 
 
 /* =========================================================
@@ -108,11 +106,10 @@ nav a:hover {
 
 .hero {
     min-height: 580px;
-
     background:
         linear-gradient(
-            rgba(5, 41, 70, 0.84),
-            rgba(5, 41, 70, 0.84)
+            rgba(5, 41, 70, 0.88),
+            rgba(5, 41, 70, 0.88)
         ),
         linear-gradient(
             135deg,
@@ -123,19 +120,14 @@ nav a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-
     text-align: center;
-
     padding: 80px 20px;
-
     color: white;
 }
 
-
 .hero-content {
-    max-width: 850px;
+    max-width: 900px;
 }
-
 
 .hero-label {
     font-size: 13px;
@@ -143,33 +135,26 @@ nav a:hover {
     font-weight: bold;
 }
 
-
 .hero h2 {
     font-size: 52px;
     line-height: 1.15;
     margin: 18px 0 20px;
 }
 
-
 .hero p {
     font-size: 20px;
-    max-width: 700px;
+    max-width: 750px;
     margin: auto;
     color: #eaf6ff;
 }
 
-
 .hero-buttons {
     margin-top: 35px;
-
     display: flex;
     justify-content: center;
-
     gap: 15px;
-
     flex-wrap: wrap;
 }
-
 
 
 /* =========================================================
@@ -178,39 +163,28 @@ nav a:hover {
 
 .btn {
     border: none;
-
     padding: 14px 25px;
-
     border-radius: 8px;
-
     font-weight: bold;
-
     cursor: pointer;
-
     text-decoration: none;
-
     display: inline-block;
-
     transition: 0.2s;
 }
-
 
 .btn:hover {
     transform: translateY(-2px);
 }
-
 
 .primary {
     background: #1687e8;
     color: white;
 }
 
-
 .secondary {
     background: white;
     color: #1687e8;
 }
-
 
 .outline-btn {
     background: white;
@@ -218,6 +192,19 @@ nav a:hover {
     border: 1px solid #1556a8;
 }
 
+.dark-btn {
+    background: #062a45;
+    color: white;
+}
+
+.green-btn {
+    background: #16874d;
+    color: white;
+}
+
+.full-btn {
+    width: 100%;
+}
 
 
 /* =========================================================
@@ -226,42 +213,32 @@ nav a:hover {
 
 .section,
 .quotation-section,
-.contact-section {
+.contact-section,
+.tools-section {
     padding: 80px 7%;
 }
 
-
 .section-title {
     text-align: center;
-
-    max-width: 750px;
-
+    max-width: 800px;
     margin: 0 auto 45px;
 }
 
-
 .section-title span {
     color: #1556a8;
-
     font-size: 13px;
-
     font-weight: bold;
-
     letter-spacing: 2px;
 }
 
-
 .section-title h2 {
     font-size: 38px;
-
     margin: 8px 0;
 }
-
 
 .section-title p {
     color: #687582;
 }
-
 
 
 /* =========================================================
@@ -270,45 +247,83 @@ nav a:hover {
 
 .services-grid {
     display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
+    grid-template-columns: repeat(3, 1fr);
     gap: 25px;
 }
 
-
 .service-card {
     background: white;
-
     padding: 30px;
-
     border-radius: 14px;
-
-    box-shadow:
-        0 5px 20px rgba(0,0,0,0.06);
-
-    border:
-        1px solid #e6edf3;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+    border: 1px solid #e6edf3;
 }
-
 
 .service-icon {
     font-size: 35px;
-
     margin-bottom: 15px;
 }
-
 
 .service-card h3 {
     margin-bottom: 10px;
 }
 
-
 .service-card p {
     color: #687582;
 }
 
+
+/* =========================================================
+   DOCUMENT TOOLS
+========================================================= */
+
+.tools-section {
+    background: #ffffff;
+}
+
+.tools-grid {
+    max-width: 1150px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.tool-card {
+    background: #f5f9fd;
+    border: 1px solid #dce7f0;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.tool-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 12px;
+    background: #1556a8;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.tool-card h3 {
+    margin-bottom: 8px;
+}
+
+.tool-card p {
+    color: #687582;
+    margin-bottom: 20px;
+}
+
+.template-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
 
 
 /* =========================================================
@@ -319,145 +334,92 @@ nav a:hover {
     background: #edf4fa;
 }
 
-
 .quotation-container {
     max-width: 1100px;
     margin: auto;
 }
 
-
-#quotationForm {
+#quotationForm,
+#qualityForm {
     background: white;
-
     padding: 38px;
-
     border-radius: 15px;
-
-    box-shadow:
-        0 5px 25px rgba(0,0,0,0.07);
+    box-shadow: 0 5px 25px rgba(0,0,0,0.07);
 }
-
 
 .form-heading {
     display: flex;
-
     align-items: center;
-
     gap: 15px;
-
-    border-bottom:
-        1px solid #e2e8ee;
-
+    border-bottom: 1px solid #e2e8ee;
     padding-bottom: 18px;
-
     margin-bottom: 25px;
 }
-
 
 .form-heading > span {
     width: 42px;
     height: 42px;
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     border-radius: 50%;
-
     background: #1556a8;
-
     color: white;
-
     font-weight: bold;
 }
-
 
 .form-heading h3 {
     margin-bottom: 2px;
 }
-
 
 .form-heading p {
     color: #7a8791;
     font-size: 13px;
 }
 
-
 .second-heading {
     margin-top: 35px;
 }
 
-
 .form-grid {
     display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
 }
-
 
 .form-group {
     margin-bottom: 20px;
 }
 
-
 .form-group label {
     display: block;
-
     margin-bottom: 7px;
-
     font-weight: bold;
-
     font-size: 14px;
 }
-
 
 input,
 select,
 textarea {
     width: 100%;
-
     padding: 13px;
-
-    border:
-        1px solid #ccd7df;
-
+    border: 1px solid #ccd7df;
     border-radius: 7px;
-
     font-size: 15px;
-
     outline: none;
-
     background: white;
 }
-
 
 input:focus,
 select:focus,
 textarea:focus {
     border-color: #1687e8;
-
-    box-shadow:
-        0 0 0 3px rgba(22,135,232,0.10);
+    box-shadow: 0 0 0 3px rgba(22,135,232,0.10);
 }
-
 
 textarea {
     resize: vertical;
 }
-
-
-.full-btn {
-    width: 100%;
-
-    font-size: 16px;
-
-    margin-top: 10px;
-}
-
 
 
 /* =========================================================
@@ -465,109 +427,67 @@ textarea {
 ========================================================= */
 
 .items-form {
-    border:
-        1px solid #dce5eb;
-
+    border: 1px solid #dce5eb;
     border-radius: 10px;
-
     overflow: hidden;
-
     margin-bottom: 25px;
 }
-
 
 .items-header,
 .item-row {
     display: grid;
-
     grid-template-columns:
         minmax(200px, 2fr)
         120px
         170px
         170px
         50px;
-
-    gap: 0;
-
     align-items: center;
 }
 
-
 .items-header {
     background: #1556a8;
-
     color: white;
-
     font-weight: bold;
-
     padding: 13px;
 }
 
-
 .item-row {
     padding: 10px;
-
-    border-top:
-        1px solid #e1e7ec;
+    border-top: 1px solid #e1e7ec;
 }
-
 
 .item-row input {
     border-radius: 4px;
-
     margin: 0 5px;
 }
 
-
 .item-amount {
     background: #f3f6f8;
-
     font-weight: bold;
 }
-
 
 .remove-item {
     width: 34px;
     height: 34px;
-
     border: none;
-
     border-radius: 50%;
-
     background: #ffe8e8;
-
     color: #d32929;
-
     font-size: 22px;
-
     cursor: pointer;
 }
-
 
 .add-item-btn {
     margin: 15px;
-
     padding: 10px 18px;
-
-    border:
-        1px dashed #1556a8;
-
+    border: 1px dashed #1556a8;
     color: #1556a8;
-
     background: #f5f9fd;
-
     border-radius: 6px;
-
     cursor: pointer;
-
     font-weight: bold;
 }
-
-
-.extra-charges {
-    margin-top: 20px;
-}
-
 
 
 /* =========================================================
@@ -576,298 +496,182 @@ textarea {
 
 .quotation-result {
     margin-top: 35px;
-
     background: #dfe7ee;
-
     padding: 25px;
-
     border-radius: 10px;
 }
 
-
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 
-
 /* =========================================================
-   ACTUAL QUOTATION DOCUMENT
+   QUOTATION DOCUMENT
 ========================================================= */
 
 #quotationDocument {
     background: white;
-
     width: 100%;
-
     max-width: 1000px;
-
     margin: auto;
-
     padding: 38px;
-
-    box-shadow:
-        0 5px 25px rgba(0,0,0,0.12);
-
+    box-shadow: 0 5px 25px rgba(0,0,0,0.12);
     color: #202020;
 }
 
-
 .document-top {
     display: flex;
-
     justify-content: space-between;
-
     align-items: flex-start;
-
     gap: 30px;
 }
 
-
 .document-company {
     display: flex;
-
     align-items: center;
-
     gap: 14px;
 }
-
 
 .document-logo {
     width: 58px;
     height: 58px;
-
     background: #1556a8;
-
     color: white;
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     font-size: 20px;
-
     font-weight: bold;
-
     border-radius: 5px;
 }
 
-
 .document-company h1 {
     font-size: 22px;
-
     color: #1556a8;
-
-    letter-spacing: 0.5px;
 }
-
 
 .document-company p {
     color: #666;
-
     font-size: 13px;
 }
 
-
 .document-reference {
     text-align: right;
-
     min-width: 240px;
 }
 
-
 .document-reference h2 {
     font-size: 22px;
-
-    color: #111;
-
     margin-bottom: 10px;
 }
 
-
 .document-reference p {
     font-size: 14px;
-
     margin: 3px 0;
 }
 
-
 .document-line {
     height: 2px;
-
     background: #183e73;
-
-    margin:
-        18px 0 0;
+    margin: 18px 0 0;
 }
 
 
-
 /* =========================================================
-   CUSTOMER DETAILS
+   DETAILS
 ========================================================= */
 
 .details-table {
     margin-top: 5px;
-
     margin-bottom: 28px;
 }
 
-
 .detail-row {
     display: grid;
-
-    grid-template-columns:
-        180px
-        25px
-        1fr;
-
+    grid-template-columns: 180px 25px 1fr;
     min-height: 40px;
-
     align-items: center;
-
-    border-bottom:
-        1px solid #d7d7d7;
-
+    border-bottom: 1px solid #d7d7d7;
     font-size: 15px;
 }
-
 
 .detail-label {
     font-weight: bold;
 }
-
 
 .detail-colon {
     font-weight: bold;
 }
 
 
-
-/* =========================================================
-   SECTION TITLE
-========================================================= */
-
-.document-section-title {
-    color: #1556a8;
-
-    font-size: 19px;
-
-    font-weight: bold;
-
-    margin:
-        20px 0 10px;
-}
-
-
-
 /* =========================================================
    QUOTATION TABLE
 ========================================================= */
 
+.document-section-title {
+    color: #1556a8;
+    font-size: 19px;
+    font-weight: bold;
+    margin: 20px 0 10px;
+}
+
 .quotation-table {
     width: 100%;
-
     border-collapse: collapse;
-
     margin-top: 10px;
-
     font-size: 14px;
 }
 
-
 .quotation-table th {
     background: #1556a8;
-
     color: white;
-
-    border:
-        1px solid #9baec3;
-
+    border: 1px solid #9baec3;
     padding: 11px 8px;
-
     text-align: left;
 }
 
-
 .quotation-table td {
-    border:
-        1px solid #c7c7c7;
-
+    border: 1px solid #c7c7c7;
     padding: 10px 8px;
-
-    vertical-align: middle;
 }
-
 
 .quotation-table tbody tr:nth-child(even) {
     background: #fafafa;
 }
 
-
 .no-column {
     width: 55px;
-
     text-align: center !important;
 }
-
 
 .quantity-column {
     width: 105px;
-
     text-align: center !important;
 }
 
-
-.price-column {
-    width: 155px;
-
-    text-align: right !important;
-}
-
-
+.price-column,
 .amount-column {
-    width: 160px;
-
+    width: 155px;
     text-align: right !important;
 }
-
 
 .money-cell {
     text-align: right;
-
     font-weight: 600;
 }
 
-
-.special-row td {
-    background: #fafafa;
-}
-
-
-.special-row td:first-child {
-    font-weight: 500;
-}
-
-
 .total-row td {
     background: #dce6f4;
-
     color: #173c70;
-
     font-weight: bold;
-
     font-size: 17px;
-
     padding: 13px 8px;
 }
-
 
 .total-row td:last-child {
     text-align: right;
 }
-
 
 
 /* =========================================================
@@ -878,24 +682,18 @@ textarea {
     margin-top: 25px;
 }
 
-
 .terms-section ul {
-    margin:
-        5px 0 12px 22px;
+    margin: 5px 0 12px 22px;
 }
-
 
 .terms-section li {
     margin-bottom: 5px;
 }
 
-
 .standard-terms p {
     font-size: 13px;
-
     margin: 4px 0;
 }
-
 
 
 /* =========================================================
@@ -904,58 +702,151 @@ textarea {
 
 .document-footer {
     margin-top: 35px;
-
     padding-top: 18px;
-
-    border-top:
-        1px solid #c7c7c7;
-
+    border-top: 1px solid #c7c7c7;
     display: flex;
-
     justify-content: space-between;
-
     gap: 30px;
-
     font-size: 13px;
-
     color: #555;
 }
 
-
 .signature-box {
     min-width: 190px;
-
     text-align: center;
 }
 
-
 .signature-line {
     height: 35px;
-
-    border-bottom:
-        1px solid #555;
-
+    border-bottom: 1px solid #555;
     margin-top: 5px;
 }
 
-
-
-/* =========================================================
-   ACTIONS
-========================================================= */
-
 .quotation-actions {
     display: flex;
-
     justify-content: center;
-
     gap: 15px;
-
     margin-top: 25px;
-
     flex-wrap: wrap;
 }
 
+
+/* =========================================================
+   QUALITY SECTION
+========================================================= */
+
+.quality-section {
+    padding: 80px 7%;
+    background: #f7fbff;
+}
+
+.quality-container {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.quality-info {
+    background: #eaf5ff;
+    border-left: 5px solid #1556a8;
+    padding: 18px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+}
+
+.quality-result {
+    margin-top: 30px;
+}
+
+.quality-document {
+    background: white;
+    max-width: 1000px;
+    margin: auto;
+    padding: 40px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.12);
+}
+
+.quality-document-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+    border-bottom: 3px solid #1556a8;
+    padding-bottom: 18px;
+    margin-bottom: 25px;
+}
+
+.quality-title h1 {
+    color: #1556a8;
+    font-size: 25px;
+}
+
+.quality-title p {
+    color: #666;
+}
+
+.quality-reference {
+    text-align: right;
+}
+
+.quality-details {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.quality-details td {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.quality-details td:first-child {
+    font-weight: bold;
+    width: 30%;
+    background: #f4f7fa;
+}
+
+.assessment-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.assessment-table th {
+    background: #1556a8;
+    color: white;
+    padding: 10px;
+    border: 1px solid #9baec3;
+    text-align: left;
+}
+
+.assessment-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.assessment-table input,
+.assessment-table select {
+    padding: 8px;
+}
+
+.quality-conclusion {
+    margin-top: 25px;
+    padding: 18px;
+    border: 1px solid #ccd7df;
+    border-radius: 8px;
+}
+
+.quality-conclusion h3 {
+    color: #1556a8;
+    margin-bottom: 8px;
+}
+
+.quality-footer {
+    margin-top: 35px;
+    padding-top: 18px;
+    border-top: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+}
 
 
 /* =========================================================
@@ -966,38 +857,25 @@ textarea {
     background: white;
 }
 
-
 .contact-grid {
     max-width: 1000px;
-
     margin: auto;
-
     display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
+    grid-template-columns: repeat(3, 1fr);
     gap: 25px;
 }
 
-
 .contact-card {
     padding: 30px;
-
     text-align: center;
-
     background: #f5f8fb;
-
     border-radius: 12px;
 }
 
-
 .contact-card h3 {
     color: #1556a8;
-
     margin-bottom: 10px;
 }
-
 
 
 /* =========================================================
@@ -1006,14 +884,10 @@ textarea {
 
 footer {
     background: #062a45;
-
     color: white;
-
     padding: 30px;
-
     text-align: center;
 }
-
 
 
 /* =========================================================
@@ -1027,82 +901,34 @@ footer {
         margin: 10mm;
     }
 
-
     body {
         background: white !important;
     }
 
-
     body * {
         visibility: hidden;
     }
-
 
     #quotationDocument,
     #quotationDocument * {
         visibility: visible;
     }
 
-
     #quotationDocument {
         position: absolute;
-
         left: 0;
         top: 0;
-
         width: 100%;
-
         max-width: none;
-
         padding: 0;
-
         margin: 0;
-
         box-shadow: none;
     }
-
 
     .quotation-actions {
         display: none !important;
     }
-
-
-    .quotation-result {
-        background: white;
-
-        padding: 0;
-
-        margin: 0;
-    }
-
-
-    .document-top {
-        break-inside: avoid;
-    }
-
-
-    .quotation-table {
-        break-inside: auto;
-    }
-
-
-    .quotation-table tr {
-        break-inside: avoid;
-        page-break-inside: avoid;
-    }
-
-
-    .terms-section {
-        break-inside: avoid;
-    }
-
-
-    .document-footer {
-        break-inside: avoid;
-    }
-
 }
-
 
 
 /* =========================================================
@@ -1115,50 +941,38 @@ footer {
         flex-direction: column;
     }
 
-
-    nav {
-        flex-wrap: wrap;
-
-        justify-content: center;
-    }
-
-
     .hero h2 {
         font-size: 38px;
     }
 
-
     .services-grid,
-    .contact-grid {
+    .contact-grid,
+    .tools-grid {
         grid-template-columns: 1fr;
     }
-
 
     .form-grid {
         grid-template-columns: 1fr;
     }
 
-
     .items-form {
         overflow-x: auto;
     }
-
 
     .items-header,
     .item-row {
         min-width: 850px;
     }
 
-
-    .document-top {
+    .document-top,
+    .quality-document-header {
         flex-direction: column;
     }
 
-
-    .document-reference {
+    .document-reference,
+    .quality-reference {
         text-align: left;
     }
-
 }
 
 
@@ -1166,557 +980,691 @@ footer {
 
     .section,
     .quotation-section,
-    .contact-section {
+    .contact-section,
+    .tools-section,
+    .quality-section {
         padding: 55px 5%;
     }
-
 
     .hero {
         min-height: 500px;
     }
 
-
     .hero h2 {
         font-size: 32px;
     }
-
 
     .hero p {
         font-size: 17px;
     }
 
-
-    #quotationForm {
+    #quotationForm,
+    #qualityForm,
+    .quality-document {
         padding: 20px;
     }
-
-
-    #quotationDocument {
-        padding: 20px;
-    }
-
 
     .document-company h1 {
         font-size: 17px;
     }
 
-
-    .document-reference {
-        min-width: 0;
-    }
-
-
     .detail-row {
-        grid-template-columns:
-            120px
-            20px
-            1fr;
-
+        grid-template-columns: 120px 20px 1fr;
         font-size: 12px;
     }
 
-
-    .quotation-table {
+    .quotation-table,
+    .assessment-table {
         font-size: 10px;
     }
 
-
     .quotation-table th,
-    .quotation-table td {
+    .quotation-table td,
+    .assessment-table th,
+    .assessment-table td {
         padding: 7px 4px;
     }
 
-
-    .document-footer {
+    .document-footer,
+    .quality-footer {
         flex-direction: column;
     }
-
 }
 
-
-    </style>
+</style>
+</head>
 
 
 <body>
 
-
-    <!-- =========================================================
+<!-- =========================================================
      HEADER
 ========================================================= -->
 
-    <header class="header">
+<header class="header">
 
-        <div class="logo">
+    <div class="logo">
 
-            <div class="logo-icon">
-                KB
-            </div>
-
-            <div>
-
-                <h1>Kenya Boreholes Services</h1>
-
-                <p>
-                    Reliable Water Solutions Across Kenya
-                </p>
-
-            </div>
-
+        <div class="logo-icon">
+            KB
         </div>
 
+        <div>
+            <h1>Kenya Boreholes Services</h1>
+            <p>Reliable Water Solutions Across Kenya</p>
+        </div>
 
-        <nav>
+    </div>
 
-            <a href="#home">Home</a>
-            <a href="#services">Services</a>
-            <a href="#quotation">Quotation</a>
-            <a href="#contact">Contact</a>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#quotation">Quotation</a>
+        <a href="#templates">Templates</a>
+        <a href="#quality">Quality</a>
+        <a href="#contact">Contact</a>
+    </nav>
 
-        </nav>
-
-    </header>
+</header>
 
 
-
-    <!-- =========================================================
+<!-- =========================================================
      HERO
 ========================================================= -->
 
-    <section id="home" class="hero">
+<section id="home" class="hero">
 
-        <div class="hero-content">
+    <div class="hero-content">
 
-            <span class="hero-label">
+        <span class="hero-label">
             PROFESSIONAL WATER SOLUTIONS
         </span>
 
-            <h2>
-                Professional Borehole Services in Kenya
-            </h2>
+        <h2>
+            Professional Borehole Services in Kenya
+        </h2>
 
-            <p>
+        <p>
+            Complete borehole solutions including drilling,
+            water testing, pump installation, maintenance,
+            site surveys and water delivery.
+        </p>
 
-                Complete borehole solutions including drilling, water testing, pump installation, maintenance, site surveys and water delivery.
+        <div class="hero-buttons">
 
-            </p>
-
-
-            <div class="hero-buttons">
-
-                <a href="#quotation" class="btn primary">
+            <a href="#quotation" class="btn primary">
                 Request Quotation
             </a>
 
-
-                <a href="#services" class="btn secondary">
-                View Services
+            <a href="#templates" class="btn secondary">
+                Document Templates
             </a>
 
-            </div>
+            <a href="#quality" class="btn secondary">
+                Water Quality
+            </a>
 
         </div>
 
-    </section>
+    </div>
+
+</section>
 
 
-
-    <!-- =========================================================
+<!-- =========================================================
      SERVICES
 ========================================================= -->
 
-    <section id="services" class="section">
+<section id="services" class="section">
 
-        <div class="section-title">
+    <div class="section-title">
 
-            <span>WHAT WE OFFER</span>
+        <span>WHAT WE OFFER</span>
 
-            <h2>
-                Our Borehole Services
-            </h2>
+        <h2>Our Borehole Services</h2>
 
+        <p>
+            Professional and affordable water solutions for
+            homes, farms, institutions and businesses.
+        </p>
+
+    </div>
+
+    <div class="services-grid">
+
+        <div class="service-card">
+            <div class="service-icon">💧</div>
+            <h3>Borehole Drilling</h3>
             <p>
-
-                Professional and affordable water solutions for homes, farms, institutions and businesses.
-
+                Professional borehole drilling services using
+                modern equipment and experienced technicians.
             </p>
-
         </div>
 
-
-        <div class="services-grid">
-
-
-            <div class="service-card">
-
-                <div class="service-icon">
-                    💧
-                </div>
-
-                <h3>
-                    Borehole Drilling
-                </h3>
-
-                <p>
-
-                    Professional borehole drilling services using modern equipment and experienced technicians.
-
-                </p>
-
-            </div>
-
-
-
-            <div class="service-card">
-
-                <div class="service-icon">
-                    🔬
-                </div>
-
-                <h3>
-                    Water Testing
-                </h3>
-
-                <p>
-
-                    Laboratory water quality testing to determine whether your borehole water is suitable for use.
-
-                </p>
-
-            </div>
-
-
-
-            <div class="service-card">
-
-                <div class="service-icon">
-                    ⚙️
-                </div>
-
-                <h3>
-                    Pump Installation
-                </h3>
-
-                <p>
-
-                    Installation of reliable submersible, solar and other pumping systems.
-
-                </p>
-
-            </div>
-
-
-
-            <div class="service-card">
-
-                <div class="service-icon">
-                    🔧
-                </div>
-
-                <h3>
-                    Maintenance
-                </h3>
-
-                <p>
-
-                    Borehole inspection, pump repair, servicing and maintenance.
-
-                </p>
-
-            </div>
-
-
-
-            <div class="service-card">
-
-                <div class="service-icon">
-                    🚚
-                </div>
-
-                <h3>
-                    Water Delivery
-                </h3>
-
-                <p>
-
-                    Water transportation and delivery services for homes, construction sites and businesses.
-
-                </p>
-
-            </div>
-
-
-
-            <div class="service-card">
-
-                <div class="service-icon">
-                    📍
-                </div>
-
-                <h3>
-                    Site Survey
-                </h3>
-
-                <p>
-
-                    Professional site assessment and groundwater survey before drilling.
-
-                </p>
-
-            </div>
-
-
+        <div class="service-card">
+            <div class="service-icon">🔬</div>
+            <h3>Water Testing</h3>
+            <p>
+                Laboratory water quality testing to determine
+                whether your borehole water is suitable for use.
+            </p>
         </div>
 
-    </section>
+        <div class="service-card">
+            <div class="service-icon">⚙️</div>
+            <h3>Pump Installation</h3>
+            <p>
+                Installation of reliable submersible,
+                solar and other pumping systems.
+            </p>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">🔧</div>
+            <h3>Maintenance</h3>
+            <p>
+                Borehole inspection, pump repair, servicing
+                and maintenance.
+            </p>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">🚚</div>
+            <h3>Water Delivery</h3>
+            <p>
+                Water transportation and delivery services
+                for homes, construction sites and businesses.
+            </p>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">📍</div>
+            <h3>Site Survey</h3>
+            <p>
+                Professional site assessment and groundwater
+                survey before drilling.
+            </p>
+        </div>
+
+    </div>
+
+</section>
 
 
-
-    <!-- =========================================================
-     QUOTATION FORM
+<!-- =========================================================
+     DOCUMENT TEMPLATES
 ========================================================= -->
 
-    <section id="quotation" class="quotation-section">
+<section id="templates" class="tools-section">
+
+    <div class="section-title">
+
+        <span>DOCUMENT CENTER</span>
+
+        <h2>Templates & Documents</h2>
+
+        <p>
+            Download blank professional documents for your
+            borehole and water service operations.
+        </p>
+
+    </div>
 
 
-        <div class="section-title">
+    <div class="tools-grid">
 
-            <span>GET STARTED</span>
+        <!-- QUOTATION -->
 
-            <h2>
-                Prepare a Professional Quotation
-            </h2>
+        <div class="tool-card">
+
+            <div class="tool-icon">📄</div>
+
+            <h3>Blank Quotation</h3>
 
             <p>
-
-                Enter your customer and project information below. You can add multiple materials, services and charges.
-
+                Download a blank quotation paper that can be
+                filled in for customers and projects.
             </p>
+
+            <button
+                class="btn primary"
+                onclick="downloadBlankQuotation()">
+                Download Quotation
+            </button>
 
         </div>
 
 
+        <!-- DELIVERY NOTE -->
 
-        <div class="quotation-container">
+        <div class="tool-card">
+
+            <div class="tool-icon">🚚</div>
+
+            <h3>Blank Delivery Note</h3>
+
+            <p>
+                Professional blank delivery note for water,
+                equipment, materials and services.
+            </p>
+
+            <button
+                class="btn primary"
+                onclick="downloadDeliveryNote()">
+                Download Delivery Note
+            </button>
+
+        </div>
 
 
-            <form id="quotationForm">
+        <!-- WATER QUALITY -->
+
+        <div class="tool-card">
+
+            <div class="tool-icon">💧</div>
+
+            <h3>Water Quality Report</h3>
+
+            <p>
+                Blank water quality report for recording
+                laboratory water testing results.
+            </p>
+
+            <button
+                class="btn primary"
+                onclick="downloadWaterQualityReport()">
+                Download Quality Report
+            </button>
+
+        </div>
 
 
-                <!-- CUSTOMER INFORMATION -->
+        <!-- SURVEY -->
 
-                <div class="form-heading">
+        <div class="tool-card">
 
-                    <span>
-                    01
-                </span>
+            <div class="tool-icon">📍</div>
 
-                    <div>
+            <h3>Borehole Survey Sheet</h3>
 
-                        <h3>
-                            Customer Information
-                        </h3>
+            <p>
+                Blank groundwater and borehole site survey
+                sheet for field assessments.
+            </p>
 
-                        <p>
-                            Enter the customer's details.
-                        </p>
+            <button
+                class="btn primary"
+                onclick="downloadSurveySheet()">
+                Download Survey Sheet
+            </button>
 
-                    </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     QUOTATION
+========================================================= -->
+
+<section id="quotation" class="quotation-section">
+
+    <div class="section-title">
+
+        <span>GET STARTED</span>
+
+        <h2>Prepare a Professional Quotation</h2>
+
+        <p>
+            Enter your customer and project information below.
+            You can add multiple materials, services and charges.
+        </p>
+
+    </div>
+
+
+    <div class="quotation-container">
+
+        <form id="quotationForm">
+
+            <!-- CUSTOMER -->
+
+            <div class="form-heading">
+
+                <span>01</span>
+
+                <div>
+                    <h3>Customer Information</h3>
+                    <p>Enter the customer's details.</p>
+                </div>
+
+            </div>
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Client Name *</label>
+
+                    <input
+                        type="text"
+                        id="customerName"
+                        placeholder="e.g. Karen Tank Services"
+                        required>
 
                 </div>
 
 
+                <div class="form-group">
 
-                <div class="form-grid">
+                    <label>Phone Number *</label>
 
-
-                    <div class="form-group">
-
-                        <label>
-                        Client Name *
-                    </label>
-
-                        <input type="text" id="customerName" placeholder="e.g. Karen Tank Services" required>
-
-                    </div>
-
-
-
-                    <div class="form-group">
-
-                        <label>
-                        Phone Number *
-                    </label>
-
-                        <input type="tel" id="phone" placeholder="e.g. 0712345678" required>
-
-                    </div>
-
-
-
-                    <div class="form-group">
-
-                        <label>
-                        Email
-                    </label>
-
-                        <input type="email" id="email" placeholder="customer@example.com">
-
-                    </div>
-
-
-
-                    <div class="form-group">
-
-                        <label>
-                        Location *
-                    </label>
-
-                        <input type="text" id="location" placeholder="e.g. Karen, Nairobi" required>
-
-                    </div>
-
-
+                    <input
+                        type="tel"
+                        id="phone"
+                        placeholder="e.g. 0712345678"
+                        required>
 
                 </div>
 
 
+                <div class="form-group">
 
-                <!-- PROJECT INFORMATION -->
+                    <label>Email</label>
 
-                <div class="form-heading second-heading">
-
-                    <span>
-                    02
-                </span>
-
-                    <div>
-
-                        <h3>
-                            Project Information
-                        </h3>
-
-                        <p>
-                            Details that will appear on the quotation.
-                        </p>
-
-                    </div>
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="customer@example.com">
 
                 </div>
 
 
+                <div class="form-group">
 
-                <div class="form-grid">
+                    <label>Location *</label>
+
+                    <input
+                        type="text"
+                        id="location"
+                        placeholder="e.g. Karen, Nairobi"
+                        required>
+
+                </div>
+
+            </div>
 
 
-                    <div class="form-group">
+            <!-- PROJECT -->
 
-                        <label>
-                        Service / Project *
-                    </label>
+            <div class="form-heading second-heading">
 
-                        <select id="service" required>
+                <span>02</span>
+
+                <div>
+                    <h3>Project Information</h3>
+                    <p>Details that will appear on the quotation.</p>
+                </div>
+
+            </div>
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Service / Project *</label>
+
+                    <select id="service" required>
 
                         <option value="">
                             Select Service
                         </option>
 
-                        <option>
-                            Borehole Drilling
-                        </option>
-
-                        <option>
-                            Borehole Maintenance
-                        </option>
-
-                        <option>
-                            Water Testing
-                        </option>
-
-                        <option>
-                            Pump Installation
-                        </option>
-
-                        <option>
-                            Water Delivery
-                        </option>
-
-                        <option>
-                            Site Survey
-                        </option>
-
-                        <option>
-                            Borehole Equipping
-                        </option>
-
-                        <option>
-                            Tank Cleaning & Servicing
-                        </option>
-
-                        <option>
-                            Other
-                        </option>
+                        <option>Borehole Drilling</option>
+                        <option>Borehole Maintenance</option>
+                        <option>Water Testing</option>
+                        <option>Pump Installation</option>
+                        <option>Water Delivery</option>
+                        <option>Site Survey</option>
+                        <option>Borehole Equipping</option>
+                        <option>Tank Cleaning & Servicing</option>
+                        <option>Other</option>
 
                     </select>
-
-                    </div>
-
-
-
-                    <div class="form-group">
-
-                        <label>
-                        Project / Tank Capacity
-                    </label>
-
-                        <input type="text" id="capacity" placeholder="e.g. 100,000 Litres">
-
-                    </div>
-
-
-
-                    <div class="form-group">
-
-                        <label>
-                        Project Date
-                    </label>
-
-                        <input type="date" id="projectDate">
-
-                    </div>
-
-
-
-                    <div class="form-group">
-
-                        <label>
-                        Validity
-                    </label>
-
-                        <input type="text" id="validity" value="30 Days">
-
-                    </div>
-
 
                 </div>
 
 
+                <div class="form-group">
 
-                <!-- ITEMS -->
+                    <label>Project / Tank Capacity</label>
 
-                <div class="form-heading second-heading">
+                    <input
+                        type="text"
+                        id="capacity"
+                        placeholder="e.g. 100,000 Litres">
 
-                    <span>
-                    03
-                </span>
+                </div>
 
-                    <div>
 
-                        <h3>
-                            Materials & Requirements
-                        </h3>
+                <div class="form-group">
+
+                    <label>Project Date</label>
+
+                    <input
+                        type="date"
+                        id="projectDate">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Validity</label>
+
+                    <input
+                        type="text"
+                        id="validity"
+                        value="30 Days">
+
+                </div>
+
+            </div>
+
+
+            <!-- ITEMS -->
+
+            <div class="form-heading second-heading">
+
+                <span>03</span>
+
+                <div>
+                    <h3>Materials & Requirements</h3>
+                    <p>Add all materials, labour and services.</p>
+                </div>
+
+            </div>
+
+
+            <div class="items-form">
+
+                <div class="items-header">
+
+                    <div>Description</div>
+                    <div>Quantity</div>
+                    <div>Unit Price (KES)</div>
+                    <div>Amount (KES)</div>
+                    <div></div>
+
+                </div>
+
+
+                <div id="itemsContainer">
+
+                    <div class="item-row">
+
+                        <input
+                            type="text"
+                            class="item-description"
+                            placeholder="e.g. Submersible Pump"
+                            required>
+
+                        <input
+                            type="number"
+                            class="item-quantity"
+                            value="1"
+                            min="0"
+                            step="0.01"
+                            required>
+
+                        <input
+                            type="number"
+                            class="item-price"
+                            value="0"
+                            min="0"
+                            step="0.01"
+                            required>
+
+                        <input
+                            type="text"
+                            class="item-amount"
+                            value="0.00"
+                            readonly>
+
+                        <button
+                            type="button"
+                            class="remove-item"
+                            onclick="removeItem(this)">
+                            ×
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="add-item-btn"
+                    onclick="addItem()">
+
+                    + Add Another Item
+
+                </button>
+
+            </div>
+
+
+            <!-- EXTRA CHARGES -->
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>
+                        Labour & Service (KES)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="labour"
+                        value="0"
+                        min="0"
+                        step="0.01">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Transport & Logistics (KES)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="transport"
+                        value="0"
+                        min="0"
+                        step="0.01">
+
+                </div>
+
+            </div>
+
+
+            <!-- NOTES -->
+
+            <div class="form-group">
+
+                <label>Terms & Notes</label>
+
+                <textarea
+                    id="notes"
+                    rows="6"
+                    placeholder="Enter quotation terms, conditions, site requirements, payment terms or other notes..."></textarea>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn primary full-btn">
+
+                Generate Professional Quotation
+
+            </button>
+
+        </form>
+
+
+        <!-- QUOTATION RESULT -->
+
+        <div
+            id="quotationResult"
+            class="quotation-result hidden">
+
+            <div id="quotationDocument">
+
+                <div class="document-top">
+
+                    <div class="document-company">
+
+                        <div class="document-logo">
+                            KB
+                        </div>
+
+                        <div>
+
+                            <h1>
+                                KENYA BOREHOLES SERVICES
+                            </h1>
+
+                            <p>
+                                Professional Water Solutions
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="document-reference">
+
+                        <h2>QUOTATION</h2>
 
                         <p>
-                            Add all materials, labour and services.
+                            <strong>Quotation Ref:</strong>
+                            <span id="quotationNumber"></span>
+                        </p>
+
+                        <p>
+                            <strong>Date:</strong>
+                            <span id="quotationDate"></span>
                         </p>
 
                     </div>
@@ -1724,618 +1672,2711 @@ footer {
                 </div>
 
 
+                <div class="document-line"></div>
 
-                <div class="items-form">
 
+                <div class="details-table">
 
-                    <div class="items-header">
-
-                        <div>
-                            Description
-                        </div>
-
-                        <div>
-                            Quantity
-                        </div>
-
-                        <div>
-                            Unit Price (KES)
-                        </div>
-
-                        <div>
-                            Amount (KES)
-                        </div>
-
-                        <div>
-                        </div>
-
+                    <div class="detail-row">
+                        <div class="detail-label">Client</div>
+                        <div class="detail-colon">:</div>
+                        <div id="resultName"></div>
                     </div>
 
-
-                    <div id="itemsContainer">
-
-
-                        <div class="item-row">
-
-                            <input type="text" class="item-description" placeholder="e.g. Submersible Pump" required>
-
-                            <input type="number" class="item-quantity" value="1" min="0" step="0.01" required>
-
-                            <input type="number" class="item-price" value="0" min="0" step="0.01" required>
-
-                            <input type="text" class="item-amount" value="0.00" readonly>
-
-                            <button type="button" class="remove-item" onclick="removeItem(this)">
-                            ×
-                        </button>
-
-                        </div>
-
-
+                    <div class="detail-row">
+                        <div class="detail-label">Location</div>
+                        <div class="detail-colon">:</div>
+                        <div id="resultLocation"></div>
                     </div>
 
+                    <div class="detail-row">
+                        <div class="detail-label">Contact</div>
+                        <div class="detail-colon">:</div>
+                        <div id="resultPhone"></div>
+                    </div>
 
+                    <div class="detail-row">
+                        <div class="detail-label">Email</div>
+                        <div class="detail-colon">:</div>
+                        <div id="resultEmail"></div>
+                    </div>
 
-                    <button type="button" class="add-item-btn" onclick="addItem()">
+                    <div class="detail-row">
+                        <div class="detail-label">Project / Service</div>
+                        <div class="detail-colon">:</div>
+                        <div id="resultService"></div>
+                    </div>
 
-                    + Add Another Item
-
-                </button>
-
+                    <div class="detail-row">
+                        <div class="detail-label">Capacity</div>
+                        <div class="detail-colon">:</div>
+                        <div id="resultCapacity"></div>
+                    </div>
 
                 </div>
 
 
-
-                <!-- EXTRA CHARGES -->
-
-                <div class="form-grid extra-charges">
-
-
-                    <div class="form-group">
-
-                        <label>
-                        Labour & Service (KES)
-                    </label>
-
-                        <input type="number" id="labour" value="0" min="0" step="0.01">
-
-                    </div>
-
-
-
-                    <div class="form-group">
-
-                        <label>
-                        Transport & Logistics (KES)
-                    </label>
-
-                        <input type="number" id="transport" value="0" min="0" step="0.01">
-
-                    </div>
-
-
+                <div class="document-section-title">
+                    MATERIALS & REQUIREMENTS
                 </div>
 
 
+                <table class="quotation-table">
 
-                <!-- NOTES -->
+                    <thead>
 
-                <div class="form-group">
+                        <tr>
 
-                    <label>
-                    Terms & Notes
-                </label>
+                            <th class="no-column">No.</th>
+                            <th>Description</th>
+                            <th class="quantity-column">Quantity</th>
+                            <th class="price-column">Unit Price (KES)</th>
+                            <th class="amount-column">Amount (KES)</th>
 
-                    <textarea id="notes" rows="6" placeholder="Enter quotation terms, conditions, site requirements, payment terms or other notes..."></textarea>
+                        </tr>
 
-                </div>
+                    </thead>
 
 
+                    <tbody id="quotationItems"></tbody>
 
-                <button type="submit" class="btn primary full-btn">
 
-                Generate Professional Quotation
+                    <tbody>
 
-            </button>
+                        <tr>
 
+                            <td colspan="4">
+                                Labour & Tank/Borehole Servicing
+                            </td>
 
-            </form>
+                            <td
+                                id="resultLabour"
+                                class="money-cell">
+                                0.00
+                            </td>
 
+                        </tr>
 
 
-            <!-- =================================================
-             QUOTATION RESULT
-        ================================================= -->
+                        <tr>
 
-            <div id="quotationResult" class="quotation-result hidden">
+                            <td colspan="4">
+                                Transport & Logistics
+                            </td>
 
+                            <td
+                                id="resultTransport"
+                                class="money-cell">
+                                0.00
+                            </td>
 
-                <!-- DOCUMENT -->
+                        </tr>
 
-                <div id="quotationDocument">
+                    </tbody>
 
 
-                    <!-- DOCUMENT HEADER -->
+                    <tfoot>
 
-                    <div class="document-top">
+                        <tr class="total-row">
 
+                            <td colspan="4">
+                                TOTAL QUOTATION
+                            </td>
 
-                        <div class="document-company">
+                            <td id="grandTotal">
+                                KES 0.00
+                            </td>
 
+                        </tr>
 
-                            <div class="document-logo">
-                                KB
-                            </div>
+                    </tfoot>
 
+                </table>
 
-                            <div>
 
-                                <h1>
-                                    KENYA BOREHOLES SERVICES
-                                </h1>
-
-                                <p>
-                                    Professional Water Solutions
-                                </p>
-
-                            </div>
-
-
-                        </div>
-
-
-
-                        <div class="document-reference">
-
-                            <h2>
-                                <span id="documentTitle">
-                                QUOTATION
-                            </span>
-                            </h2>
-
-                            <p>
-                                <strong>
-                                Quotation Ref:
-                            </strong>
-
-                                <span id="quotationNumber">
-                            </span>
-                            </p>
-
-                            <p>
-                                <strong>
-                                Date:
-                            </strong>
-
-                                <span id="quotationDate">
-                            </span>
-                            </p>
-
-                        </div>
-
-
-                    </div>
-
-
-
-                    <div class="document-line">
-                    </div>
-
-
-
-                    <!-- CUSTOMER / PROJECT DETAILS -->
-
-                    <div class="details-table">
-
-
-                        <div class="detail-row">
-
-                            <div class="detail-label">
-                                Client
-                            </div>
-
-                            <div class="detail-colon">
-                                :
-                            </div>
-
-                            <div id="resultName">
-                            </div>
-
-                        </div>
-
-
-
-                        <div class="detail-row">
-
-                            <div class="detail-label">
-                                Location
-                            </div>
-
-                            <div class="detail-colon">
-                                :
-                            </div>
-
-                            <div id="resultLocation">
-                            </div>
-
-                        </div>
-
-
-
-                        <div class="detail-row">
-
-                            <div class="detail-label">
-                                Contact
-                            </div>
-
-                            <div class="detail-colon">
-                                :
-                            </div>
-
-                            <div id="resultPhone">
-                            </div>
-
-                        </div>
-
-
-
-                        <div class="detail-row">
-
-                            <div class="detail-label">
-                                Email
-                            </div>
-
-                            <div class="detail-colon">
-                                :
-                            </div>
-
-                            <div id="resultEmail">
-                            </div>
-
-                        </div>
-
-
-
-                        <div class="detail-row">
-
-                            <div class="detail-label">
-                                Project / Service
-                            </div>
-
-                            <div class="detail-colon">
-                                :
-                            </div>
-
-                            <div id="resultService">
-                            </div>
-
-                        </div>
-
-
-
-                        <div class="detail-row" id="capacityRow">
-
-                            <div class="detail-label">
-                                Capacity
-                            </div>
-
-                            <div class="detail-colon">
-                                :
-                            </div>
-
-                            <div id="resultCapacity">
-                            </div>
-
-                        </div>
-
-
-                    </div>
-
-
-
-                    <!-- SECTION TITLE -->
+                <div class="terms-section">
 
                     <div class="document-section-title">
+                        TERMS & NOTES
+                    </div>
 
-                        MATERIALS & REQUIREMENTS
+                    <ul id="resultNotesList"></ul>
+
+                    <div class="standard-terms">
+
+                        <p>
+                            • Quotation is based on the listed materials and stated project scope.
+                        </p>
+
+                        <p>
+                            • Any additional repairs or materials required after inspection will be communicated and quoted separately.
+                        </p>
+
+                        <p>
+                            • Prices are subject to confirmation before commencement of works.
+                        </p>
+
+                        <p>
+                            • Site assessment may be required before final confirmation.
+                        </p>
+
+                        <p id="validityText">
+                            • This quotation is valid for 30 Days.
+                        </p>
 
                     </div>
 
+                </div>
 
 
-                    <!-- QUOTATION TABLE -->
+                <div class="document-footer">
 
-                    <table class="quotation-table" id="quotationItemsTable">
+                    <div>
 
-                        <thead>
-
-                            <tr>
-
-                                <th class="no-column">
-                                    No.
-                                </th>
-
-                                <th>
-                                    Description
-                                </th>
-
-                                <th class="quantity-column">
-                                    Quantity
-                                </th>
-
-                                <th class="price-column">
-                                    Unit Price (KES)
-                                </th>
-
-                                <th class="amount-column">
-                                    Amount (KES)
-                                </th>
-
-                            </tr>
-
-                        </thead>
-
-
-                        <tbody id="quotationItems">
-
-                        </tbody>
-
-
-                        <tbody>
-
-
-                            <tr class="special-row">
-
-                                <td colspan="4">
-                                    Labour & Tank/Borehole Servicing
-                                </td>
-
-                                <td id="resultLabour" class="money-cell">
-                                    0.00
-                                </td>
-
-                            </tr>
-
-
-
-                            <tr class="special-row">
-
-                                <td colspan="4">
-                                    Transport & Logistics
-                                </td>
-
-                                <td id="resultTransport" class="money-cell">
-                                    0.00
-                                </td>
-
-                            </tr>
-
-
-                        </tbody>
-
-
-
-                        <tfoot>
-
-                            <tr class="total-row">
-
-                                <td colspan="4">
-                                    TOTAL QUOTATION
-                                </td>
-
-                                <td id="grandTotal">
-                                    KES 0.00
-                                </td>
-
-                            </tr>
-
-                        </tfoot>
-
-
-                    </table>
-
-
-
-                    <!-- TERMS -->
-
-                    <div class="terms-section">
-
-
-                        <div class="document-section-title">
-
-                            TERMS & NOTES
-
-                        </div>
-
-
-                        <ul id="resultNotesList">
-
-                        </ul>
-
-
-                        <div class="standard-terms">
-
-                            <p>
-                                • Quotation is based on the listed materials and stated project scope.
-                            </p>
-
-                            <p>
-                                • Any additional repairs or materials required after inspection will be communicated and quoted separately.
-                            </p>
-
-                            <p>
-                                • Prices are subject to confirmation before commencement of works.
-                            </p>
-
-                            <p>
-                                • Site assessment may be required before final confirmation.
-                            </p>
-
-                            <p id="validityText">
-                                • This quotation is valid for 30 Days.
-                            </p>
-
-                        </div>
-
-
-                    </div>
-
-
-
-                    <!-- FOOTER -->
-
-                    <div class="document-footer">
-
-
-                        <div>
-
-                            <strong>
+                        <strong>
                             KENYA BOREHOLES SERVICES
                         </strong>
 
-                            <p>
-                                Professional Water Solutions Across Kenya
-                            </p>
-
-                        </div>
-
-
-                        <div class="signature-box">
-
-                            <p>
-                                Authorized By
-                            </p>
-
-                            <div class="signature-line">
-                            </div>
-
-                        </div>
-
+                        <p>
+                            Professional Water Solutions Across Kenya
+                        </p>
 
                     </div>
 
 
+                    <div class="signature-box">
+
+                        <p>Authorized By</p>
+
+                        <div class="signature-line"></div>
+
+                    </div>
+
                 </div>
 
+            </div>
 
 
-                <!-- ACTIONS -->
+            <div class="quotation-actions">
 
-                <div class="quotation-actions">
-
-
-                    <button class="btn primary" onclick="downloadQuotationPDF()">
+                <button
+                    class="btn primary"
+                    onclick="downloadQuotationPDF()">
                     Download Quotation PDF
                 </button>
 
-
-
-                    <button class="btn secondary" onclick="printQuotation()">
+                <button
+                    class="btn secondary"
+                    onclick="printQuotation()">
                     Print Quotation
                 </button>
 
-
-
-                    <button class="btn outline-btn" onclick="editQuotation()">
+                <button
+                    class="btn outline-btn"
+                    onclick="editQuotation()">
                     Edit Quotation
                 </button>
 
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     WATER QUALITY ASSESSMENT
+========================================================= -->
+
+<section id="quality" class="quality-section">
+
+    <div class="section-title">
+
+        <span>WATER QUALITY</span>
+
+        <h2>Water Quality Assessment</h2>
+
+        <p>
+            Enter water sample information and test results,
+            then generate a professional downloadable report.
+        </p>
+
+    </div>
+
+
+    <div class="quality-container">
+
+
+        <div class="quality-info">
+
+            <strong>Important:</strong>
+
+            This form records water quality assessment information.
+            Actual laboratory suitability should be determined by
+            the appropriate laboratory or qualified professional.
+
+        </div>
+
+
+        <form id="qualityForm">
+
+
+            <div class="form-heading">
+
+                <span>01</span>
+
+                <div>
+                    <h3>Sample Information</h3>
+                    <p>Enter the customer and sample details.</p>
+                </div>
+
+            </div>
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label>Client / Customer Name *</label>
+
+                    <input
+                        type="text"
+                        id="qualityClient"
+                        placeholder="Customer name"
+                        required>
 
                 </div>
 
 
+                <div class="form-group">
+
+                    <label>Sample ID *</label>
+
+                    <input
+                        type="text"
+                        id="sampleId"
+                        placeholder="e.g. WQ-001"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Sample Location *</label>
+
+                    <input
+                        type="text"
+                        id="sampleLocation"
+                        placeholder="e.g. Meru, Kenya"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Water Source</label>
+
+                    <select id="waterSource">
+
+                        <option>Borehole</option>
+                        <option>Well</option>
+                        <option>River</option>
+                        <option>Spring</option>
+                        <option>Tank</option>
+                        <option>Other</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Sample Collection Date</label>
+
+                    <input
+                        type="date"
+                        id="collectionDate">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Assessment Date</label>
+
+                    <input
+                        type="date"
+                        id="assessmentDate">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Collected By</label>
+
+                    <input
+                        type="text"
+                        id="collectedBy"
+                        placeholder="Name">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Tested By</label>
+
+                    <input
+                        type="text"
+                        id="testedBy"
+                        placeholder="Laboratory / Technician">
+
+                </div>
+
             </div>
 
 
+            <!-- PARAMETERS -->
+
+            <div class="form-heading second-heading">
+
+                <span>02</span>
+
+                <div>
+                    <h3>Water Quality Parameters</h3>
+                    <p>Enter the measured values and observations.</p>
+                </div>
+
+            </div>
+
+
+            <div style="overflow-x:auto;">
+
+                <table class="assessment-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Parameter</th>
+                            <th>Result</th>
+                            <th>Unit</th>
+                            <th>Assessment / Observation</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+
+                        <tr>
+
+                            <td>pH</td>
+
+                            <td>
+                                <input
+                                    type="text"
+                                    id="phResult"
+                                    placeholder="e.g. 7.2">
+                            </td>
+
+                            <td>pH</td>
+
+                            <td>
+                                <select id="phAssessment">
+                                    <option>Acceptable</option>
+                                    <option>Requires Attention</option>
+                                    <option>Not Assessed</option>
+                                </select>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>Turbidity</td>
+
+                            <td>
+                                <input
+                                    type="text"
+                                    id="turbidityResult"
+                                    placeholder="e.g. 2.1">
+                            </td>
+
+                            <td>NTU</td>
+
+                            <td>
+                                <select id="turbidityAssessment">
+                                    <option>Acceptable</option>
+                                    <option>Requires Attention</option>
+                                    <option>Not Assessed</option>
+                                </select>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>Total Dissolved Solids</td>
+
+                            <td>
+                                <input
+                                    type="text"
+                                    id="tdsResult"
+                                    placeholder="e.g. 450">
+                            </td>
+
+                            <td>mg/L</td>
+
+                            <td>
+                                <select id="tdsAssessment">
+                                    <option>Acceptable</option>
+                                    <option>Requires Attention</option>
+                                    <option>Not Assessed</option>
+                                </select>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>Electrical Conductivity</td>
+
+                            <td>
+                                <input
+                                    type="text"
+                                    id="ecResult"
+                                    placeholder="e.g. 700">
+                            </td>
+
+                            <td>µS/cm</td>
+
+                            <td>
+                                <select id="ecAssessment">
+                                    <option>Acceptable</option>
+                                    <option>Requires Attention</option>
+                                    <option>Not Assessed</option>
+                                </select>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>Colour</td>
+
+                            <td>
+                                <input
+                                    type="text"
+                                    id="colourResult"
+                                    placeholder="Observation">
+                            </td>
+
+                            <td>Visual</td>
+
+                            <td>
+                                <select id="colourAssessment">
+                                    <option>Acceptable</option>
+                                    <option>Requires Attention</option>
+                                    <option>Not Assessed</option>
+                                </select>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>Odour</td>
+
+                            <td>
+                                <input
+                                    type="text"
+                                    id="odourResult"
+                                    placeholder="Observation">
+                            </td>
+
+                            <td>Visual</td>
+
+                            <td>
+                                <select id="odourAssessment">
+                                    <option>Acceptable</option>
+                                    <option>Requires Attention</option>
+                                    <option>Not Assessed</option>
+                                </select>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>Hardness</td>
+
+                            <td>
+                                <input
+                                    type="text"
+                                    id="hardnessResult"
+                                    placeholder="e.g. 180">
+                            </td>
+
+                            <td>mg/L</td>
+
+                            <td>
+                                <select id="hardnessAssessment">
+                                    <option>Acceptable</option>
+                                    <option>Requires Attention</option>
+                                    <option>Not Assessed</option>
+                                </select>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>Iron</td>
+
+                            <td>
+                                <input
+                                    type="text"
+                                    id="ironResult"
+                                    placeholder="e.g. 0.2">
+                            </td>
+
+                            <td>mg/L</td>
+
+                            <td>
+                                <select id="ironAssessment">
+                                    <option>Acceptable</option>
+                                    <option>Requires Attention</option>
+                                    <option>Not Assessed</option>
+                                </select>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>Nitrates</td>
+
+                            <td>
+                                <input
+                                    type="text"
+                                    id="nitrateResult"
+                                    placeholder="e.g. 10">
+                            </td>
+
+                            <td>mg/L</td>
+
+                            <td>
+                                <select id="nitrateAssessment">
+                                    <option>Acceptable</option>
+                                    <option>Requires Attention</option>
+                                    <option>Not Assessed</option>
+                                </select>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>Fluoride</td>
+
+                            <td>
+                                <input
+                                    type="text"
+                                    id="fluorideResult"
+                                    placeholder="e.g. 0.8">
+                            </td>
+
+                            <td>mg/L</td>
+
+                            <td>
+                                <select id="fluorideAssessment">
+                                    <option>Acceptable</option>
+                                    <option>Requires Attention</option>
+                                    <option>Not Assessed</option>
+                                </select>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>Total Coliforms</td>
+
+                            <td>
+                                <input
+                                    type="text"
+                                    id="coliformResult"
+                                    placeholder="Result">
+                            </td>
+
+                            <td>CFU/100mL</td>
+
+                            <td>
+                                <select id="coliformAssessment">
+                                    <option>Acceptable</option>
+                                    <option>Requires Attention</option>
+                                    <option>Not Assessed</option>
+                                </select>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>E. coli</td>
+
+                            <td>
+                                <input
+                                    type="text"
+                                    id="ecoliResult"
+                                    placeholder="Result">
+                            </td>
+
+                            <td>CFU/100mL</td>
+
+                            <td>
+                                <select id="ecoliAssessment">
+                                    <option>Acceptable</option>
+                                    <option>Requires Attention</option>
+                                    <option>Not Assessed</option>
+                                </select>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- CONCLUSION -->
+
+            <div class="form-heading second-heading">
+
+                <span>03</span>
+
+                <div>
+                    <h3>Assessment Conclusion</h3>
+                    <p>Complete the professional assessment details.</p>
+                </div>
+
+            </div>
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label>Overall Assessment</label>
+
+                    <select id="overallAssessment">
+
+                        <option>Acceptable</option>
+                        <option>Requires Further Testing</option>
+                        <option>Requires Treatment</option>
+                        <option>Not Suitable Without Treatment</option>
+                        <option>Pending Laboratory Confirmation</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Report Reference</label>
+
+                    <input
+                        type="text"
+                        id="qualityReference"
+                        placeholder="e.g. KBS-WQ-2026-001">
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Comments / Recommendations</label>
+
+                <textarea
+                    id="qualityComments"
+                    rows="6"
+                    placeholder="Enter observations, recommendations, treatment requirements or additional notes..."></textarea>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn green-btn full-btn">
+
+                Generate Water Quality Assessment
+
+            </button>
+
+        </form>
+
+
+        <!-- QUALITY RESULT -->
+
+        <div
+            id="qualityResult"
+            class="quality-result hidden">
+
+            <div
+                id="qualityDocument"
+                class="quality-document">
+
+
+                <div class="quality-document-header">
+
+                    <div class="quality-title">
+
+                        <h1>
+                            KENYA BOREHOLES SERVICES
+                        </h1>
+
+                        <p>
+                            WATER QUALITY ASSESSMENT REPORT
+                        </p>
+
+                    </div>
+
+
+                    <div class="quality-reference">
+
+                        <strong>Report Ref:</strong>
+
+                        <span id="resultQualityReference">
+                            -
+                        </span>
+
+                        <br>
+
+                        <strong>Date:</strong>
+
+                        <span id="resultAssessmentDate">
+                            -
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <table class="quality-details">
+
+                    <tr>
+                        <td>Client / Customer</td>
+                        <td id="resultQualityClient"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Sample ID</td>
+                        <td id="resultSampleId"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Sample Location</td>
+                        <td id="resultSampleLocation"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Water Source</td>
+                        <td id="resultWaterSource"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Sample Collection Date</td>
+                        <td id="resultCollectionDate"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Collected By</td>
+                        <td id="resultCollectedBy"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Tested By</td>
+                        <td id="resultTestedBy"></td>
+                    </tr>
+
+                </table>
+
+
+                <h3 class="document-section-title">
+                    WATER QUALITY RESULTS
+                </h3>
+
+
+                <table class="assessment-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Parameter</th>
+                            <th>Result</th>
+                            <th>Unit</th>
+                            <th>Assessment</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="qualityResultsBody">
+                    </tbody>
+
+                </table>
+
+
+                <div class="quality-conclusion">
+
+                    <h3>Overall Assessment</h3>
+
+                    <p id="resultOverallAssessment"></p>
+
+                    <br>
+
+                    <h3>Comments / Recommendations</h3>
+
+                    <p id="resultQualityComments"></p>
+
+                </div>
+
+
+                <div class="quality-footer">
+
+                    <div>
+
+                        <strong>
+                            KENYA BOREHOLES SERVICES
+                        </strong>
+
+                        <p>
+                            Professional Water Solutions Across Kenya
+                        </p>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Authorized By
+                        </strong>
+
+                        <br><br>
+
+                        __________________________
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="quotation-actions">
+
+                <button
+                    class="btn green-btn"
+                    onclick="downloadQualityPDF()">
+
+                    Download Water Quality PDF
+
+                </button>
+
+
+                <button
+                    class="btn secondary"
+                    onclick="printQualityReport()">
+
+                    Print Report
+
+                </button>
+
+
+                <button
+                    class="btn outline-btn"
+                    onclick="editQualityReport()">
+
+                    Edit Assessment
+
+                </button>
+
+            </div>
+
         </div>
 
-    </section>
+    </div>
+
+</section>
 
 
-
-    <!-- =========================================================
+<!-- =========================================================
      CONTACT
 ========================================================= -->
 
-    <section id="contact" class="contact-section">
+<section id="contact" class="contact-section">
 
-        <div class="section-title">
+    <div class="section-title">
 
-            <span>
-            CONTACT US
-        </span>
+        <span>CONTACT US</span>
 
-            <h2>
-                Let's Discuss Your Water Project
-            </h2>
+        <h2>Let's Discuss Your Water Project</h2>
+
+    </div>
+
+
+    <div class="contact-grid">
+
+        <div class="contact-card">
+
+            <h3>Phone</h3>
+
+            <p>
+                +254 700 000 000
+            </p>
+
+        </div>
+
+
+        <div class="contact-card">
+
+            <h3>Email</h3>
+
+            <p>
+                info@kenyaboreholes.co.ke
+            </p>
 
         </div>
 
 
+        <div class="contact-card">
 
-        <div class="contact-grid">
+            <h3>Location</h3>
 
-
-            <div class="contact-card">
-
-                <h3>
-                    Phone
-                </h3>
-
-                <p>
-                    +254 700 000 000
-                </p>
-
-            </div>
-
-
-
-            <div class="contact-card">
-
-                <h3>
-                    Email
-                </h3>
-
-                <p>
-                    info@kenyaboreholes.co.ke
-                </p>
-
-            </div>
-
-
-
-            <div class="contact-card">
-
-                <h3>
-                    Location
-                </h3>
-
-                <p>
-                    Kenya
-                </p>
-
-            </div>
-
+            <p>
+                Kenya
+            </p>
 
         </div>
 
-    </section>
+    </div>
+
+</section>
 
 
+<footer>
 
-    <footer>
+    <p>
+        © 2026 Kenya Boreholes Services.
+        All Rights Reserved.
+    </p>
 
-        <p>
-            © 2026 Kenya Boreholes Services. All Rights Reserved.
-        </p>
-
-    </footer>
-
+</footer>
 
 
-    <script src="app.js"></script>
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+
+/* =========================================================
+   GENERAL HELPERS
+========================================================= */
+
+function escapeHTML(value) {
+
+    if (value === null || value === undefined) {
+        return "";
+    }
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+function money(value) {
+
+    return Number(value || 0).toLocaleString(
+        "en-KE",
+        {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }
+    );
+
+}
+
+
+function today() {
+
+    const d = new Date();
+
+    return d.toLocaleDateString(
+        "en-GB"
+    );
+
+}
+
+
+function generateReference(prefix) {
+
+    const d = new Date();
+
+    const year = d.getFullYear();
+
+    const random =
+        Math.floor(
+            1000 + Math.random() * 9000
+        );
+
+    return `${prefix}-${year}-${random}`;
+
+}
+
+
+/* =========================================================
+   QUOTATION ITEMS
+========================================================= */
+
+function calculateItem(row) {
+
+    const quantity =
+        parseFloat(
+            row.querySelector(".item-quantity").value
+        ) || 0;
+
+    const price =
+        parseFloat(
+            row.querySelector(".item-price").value
+        ) || 0;
+
+    const amount = quantity * price;
+
+    row.querySelector(".item-amount").value =
+        amount.toFixed(2);
+
+}
+
+
+function calculateAllItems() {
+
+    document
+        .querySelectorAll(".item-row")
+        .forEach(row => {
+
+            calculateItem(row);
+
+        });
+
+}
+
+
+document.addEventListener(
+    "input",
+    function(event) {
+
+        if (
+            event.target.classList.contains("item-quantity") ||
+            event.target.classList.contains("item-price")
+        ) {
+
+            const row =
+                event.target.closest(".item-row");
+
+            calculateItem(row);
+
+        }
+
+    }
+);
+
+
+function addItem() {
+
+    const container =
+        document.getElementById(
+            "itemsContainer"
+        );
+
+    const row =
+        document.createElement("div");
+
+    row.className = "item-row";
+
+    row.innerHTML = `
+
+        <input
+            type="text"
+            class="item-description"
+            placeholder="e.g. Borehole Casing"
+            required>
+
+        <input
+            type="number"
+            class="item-quantity"
+            value="1"
+            min="0"
+            step="0.01"
+            required>
+
+        <input
+            type="number"
+            class="item-price"
+            value="0"
+            min="0"
+            step="0.01"
+            required>
+
+        <input
+            type="text"
+            class="item-amount"
+            value="0.00"
+            readonly>
+
+        <button
+            type="button"
+            class="remove-item"
+            onclick="removeItem(this)">
+            ×
+        </button>
+    `;
+
+    container.appendChild(row);
+
+}
+
+
+function removeItem(button) {
+
+    const container =
+        document.getElementById(
+            "itemsContainer"
+        );
+
+    const rows =
+        container.querySelectorAll(
+            ".item-row"
+        );
+
+    if (rows.length <= 1) {
+
+        alert(
+            "At least one quotation item is required."
+        );
+
+        return;
+    }
+
+    button.closest(".item-row").remove();
+
+}
+
+
+/* =========================================================
+   GENERATE QUOTATION
+========================================================= */
+
+document
+    .getElementById("quotationForm")
+    .addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+            calculateAllItems();
+
+
+            const customerName =
+                document.getElementById(
+                    "customerName"
+                ).value;
+
+            const phone =
+                document.getElementById(
+                    "phone"
+                ).value;
+
+            const email =
+                document.getElementById(
+                    "email"
+                ).value;
+
+            const location =
+                document.getElementById(
+                    "location"
+                ).value;
+
+            const service =
+                document.getElementById(
+                    "service"
+                ).value;
+
+            const capacity =
+                document.getElementById(
+                    "capacity"
+                ).value;
+
+            const labour =
+                parseFloat(
+                    document.getElementById(
+                        "labour"
+                    ).value
+                ) || 0;
+
+            const transport =
+                parseFloat(
+                    document.getElementById(
+                        "transport"
+                    ).value
+                ) || 0;
+
+            const validity =
+                document.getElementById(
+                    "validity"
+                ).value;
+
+
+            document.getElementById(
+                "resultName"
+            ).textContent = customerName;
+
+            document.getElementById(
+                "resultPhone"
+            ).textContent = phone;
+
+            document.getElementById(
+                "resultEmail"
+            ).textContent =
+                email || "N/A";
+
+            document.getElementById(
+                "resultLocation"
+            ).textContent = location;
+
+            document.getElementById(
+                "resultService"
+            ).textContent = service;
+
+            document.getElementById(
+                "resultCapacity"
+            ).textContent =
+                capacity || "N/A";
+
+            document.getElementById(
+                "quotationNumber"
+            ).textContent =
+                generateReference("KBS-Q");
+
+            document.getElementById(
+                "quotationDate"
+            ).textContent =
+                today();
+
+
+            const quotationItems =
+                document.getElementById(
+                    "quotationItems"
+                );
+
+            quotationItems.innerHTML = "";
+
+
+            let total = 0;
+
+            let itemNumber = 1;
+
+
+            document
+                .querySelectorAll(".item-row")
+                .forEach(row => {
+
+                    const description =
+                        row.querySelector(
+                            ".item-description"
+                        ).value;
+
+                    const quantity =
+                        parseFloat(
+                            row.querySelector(
+                                ".item-quantity"
+                            ).value
+                        ) || 0;
+
+                    const price =
+                        parseFloat(
+                            row.querySelector(
+                                ".item-price"
+                            ).value
+                        ) || 0;
+
+                    const amount =
+                        quantity * price;
+
+                    total += amount;
+
+
+                    const tr =
+                        document.createElement(
+                            "tr"
+                        );
+
+                    tr.innerHTML = `
+
+                        <td style="text-align:center;">
+                            ${itemNumber}
+                        </td>
+
+                        <td>
+                            ${escapeHTML(description)}
+                        </td>
+
+                        <td style="text-align:center;">
+                            ${quantity}
+                        </td>
+
+                        <td style="text-align:right;">
+                            ${money(price)}
+                        </td>
+
+                        <td style="text-align:right;">
+                            ${money(amount)}
+                        </td>
+
+                    `;
+
+                    quotationItems.appendChild(tr);
+
+                    itemNumber++;
+
+                });
+
+
+            total += labour;
+            total += transport;
+
+
+            document.getElementById(
+                "resultLabour"
+            ).textContent =
+                money(labour);
+
+            document.getElementById(
+                "resultTransport"
+            ).textContent =
+                money(transport);
+
+            document.getElementById(
+                "grandTotal"
+            ).textContent =
+                "KES " + money(total);
+
+
+            const notes =
+                document.getElementById(
+                    "notes"
+                ).value.trim();
+
+            const notesList =
+                document.getElementById(
+                    "resultNotesList"
+                );
+
+            notesList.innerHTML = "";
+
+
+            if (notes) {
+
+                notes
+                    .split("\n")
+                    .filter(
+                        line =>
+                            line.trim()
+                    )
+                    .forEach(line => {
+
+                        const li =
+                            document.createElement(
+                                "li"
+                            );
+
+                        li.textContent =
+                            line.trim();
+
+                        notesList.appendChild(
+                            li
+                        );
+
+                    });
+
+            }
+
+
+            document.getElementById(
+                "validityText"
+            ).textContent =
+                "• This quotation is valid for " +
+                validity +
+                ".";
+
+
+            document
+                .getElementById(
+                    "quotationResult"
+                )
+                .classList.remove(
+                    "hidden"
+                );
+
+
+            document
+                .getElementById(
+                    "quotationResult"
+                )
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        }
+    );
+
+
+/* =========================================================
+   QUOTATION PRINT
+========================================================= */
+
+function printQuotation() {
+
+    window.print();
+
+}
+
+
+function editQuotation() {
+
+    document
+        .getElementById(
+            "quotationForm"
+        )
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+/* =========================================================
+   PDF / PRINT WINDOW
+========================================================= */
+
+function printElementAsPDF(
+    elementId,
+    title
+) {
+
+    const element =
+        document.getElementById(
+            elementId
+        );
+
+    if (!element) {
+
+        alert(
+            "Document could not be found."
+        );
+
+        return;
+    }
+
+
+    const printWindow =
+        window.open(
+            "",
+            "_blank"
+        );
+
+
+    printWindow.document.write(`
+
+        <!DOCTYPE html>
+
+        <html>
+
+        <head>
+
+            <title>${escapeHTML(title)}</title>
+
+            <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1.0">
+
+            <style>
+
+                @page {
+                    size: A4;
+                    margin: 10mm;
+                }
+
+                body {
+                    font-family: Arial, sans-serif;
+                    background: white;
+                    color: #202020;
+                }
+
+                * {
+                    box-sizing: border-box;
+                }
+
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+
+                th {
+                    background: #1556a8 !important;
+                    color: white !important;
+                }
+
+                th,
+                td {
+                    border: 1px solid #ccc;
+                    padding: 8px;
+                }
+
+                input,
+                select,
+                textarea {
+                    border: none;
+                }
+
+            </style>
+
+        </head>
+
+        <body>
+
+            ${element.outerHTML}
+
+        </body>
+
+        </html>
+
+    `);
+
+
+    printWindow.document.close();
+
+    printWindow.focus();
+
+
+    setTimeout(
+        function() {
+
+            printWindow.print();
+
+        },
+        700
+    );
+
+}
+
+
+function downloadQuotationPDF() {
+
+    printElementAsPDF(
+        "quotationDocument",
+        "Kenya Boreholes Services Quotation"
+    );
+
+}
+
+
+/* =========================================================
+   TEMPLATE DOCUMENT GENERATOR
+========================================================= */
+
+function downloadDocument(
+    title,
+    html
+) {
+
+    const win =
+        window.open(
+            "",
+            "_blank"
+        );
+
+
+    win.document.write(`
+
+        <!DOCTYPE html>
+
+        <html>
+
+        <head>
+
+            <title>${escapeHTML(title)}</title>
+
+            <style>
+
+                @page {
+                    size: A4;
+                    margin: 15mm;
+                }
+
+                body {
+                    font-family: Arial, sans-serif;
+                    color: #222;
+                    padding: 10px;
+                }
+
+                h1 {
+                    color: #1556a8;
+                    margin-bottom: 5px;
+                }
+
+                h2 {
+                    color: #1556a8;
+                    border-bottom: 2px solid #1556a8;
+                    padding-bottom: 8px;
+                    margin-top: 25px;
+                }
+
+                .header {
+                    display: flex;
+                    justify-content: space-between;
+                    border-bottom: 3px solid #1556a8;
+                    padding-bottom: 15px;
+                }
+
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-top: 15px;
+                }
+
+                th,
+                td {
+                    border: 1px solid #888;
+                    padding: 9px;
+                    height: 30px;
+                }
+
+                th {
+                    background: #1556a8;
+                    color: white;
+                }
+
+                .blank {
+                    height: 45px;
+                }
+
+                .signature {
+                    margin-top: 60px;
+                    display: flex;
+                    justify-content: space-between;
+                }
+
+                .signature div {
+                    width: 40%;
+                    border-top: 1px solid #333;
+                    text-align: center;
+                    padding-top: 5px;
+                }
+
+                .box {
+                    border: 1px solid #999;
+                    padding: 15px;
+                    margin-top: 15px;
+                }
+
+            </style>
+
+        </head>
+
+        <body>
+
+            ${html}
+
+            <script>
+
+                window.onload = function() {
+
+                    setTimeout(
+                        function() {
+                            window.print();
+                        },
+                        500
+                    );
+
+                };
+
+            <\/script>
+
+        </body>
+
+        </html>
+
+    `);
+
+    win.document.close();
+
+}
+
+
+/* =========================================================
+   BLANK QUOTATION
+========================================================= */
+
+function downloadBlankQuotation() {
+
+    downloadDocument(
+        "Blank Quotation",
+        `
+
+        <div class="header">
+
+            <div>
+
+                <h1>
+                    KENYA BOREHOLES SERVICES
+                </h1>
+
+                <p>
+                    Professional Water Solutions Across Kenya
+                </p>
+
+            </div>
+
+            <div>
+
+                <h2>
+                    QUOTATION
+                </h2>
+
+                <p>
+                    Quotation No: __________________
+                </p>
+
+                <p>
+                    Date: __________________
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <h2>Customer Information</h2>
+
+        <table>
+
+            <tr>
+                <td><strong>Client Name</strong></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td><strong>Phone</strong></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td><strong>Email</strong></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td><strong>Location</strong></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td><strong>Project / Service</strong></td>
+                <td></td>
+            </tr>
+
+        </table>
+
+
+        <h2>Materials & Services</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>No.</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Unit Price (KES)</th>
+                    <th>Amount (KES)</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                ${Array.from(
+                    {length: 10},
+                    (_, i) => `
+                    <tr>
+                        <td>${i + 1}</td>
+                        <td class="blank"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    `
+                ).join("")}
+
+            </tbody>
+
+            <tfoot>
+
+                <tr>
+                    <td colspan="4">
+                        Labour & Service
+                    </td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td colspan="4">
+                        Transport & Logistics
+                    </td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td colspan="4">
+                        <strong>TOTAL</strong>
+                    </td>
+                    <td></td>
+                </tr>
+
+            </tfoot>
+
+        </table>
+
+
+        <h2>Terms & Notes</h2>
+
+        <div class="box">
+
+            <br><br><br><br><br>
+
+        </div>
+
+
+        <div class="signature">
+
+            <div>
+                Authorized By
+            </div>
+
+            <div>
+                Customer Approval
+            </div>
+
+        </div>
+
+        `
+    );
+
+}
+
+
+/* =========================================================
+   DELIVERY NOTE
+========================================================= */
+
+function downloadDeliveryNote() {
+
+    downloadDocument(
+        "Blank Delivery Note",
+        `
+
+        <div class="header">
+
+            <div>
+
+                <h1>
+                    KENYA BOREHOLES SERVICES
+                </h1>
+
+                <p>
+                    Professional Water Solutions Across Kenya
+                </p>
+
+            </div>
+
+            <div>
+
+                <h2>
+                    DELIVERY NOTE
+                </h2>
+
+                <p>
+                    Delivery No: __________________
+                </p>
+
+                <p>
+                    Date: __________________
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <h2>Customer Details</h2>
+
+        <table>
+
+            <tr>
+                <td><strong>Customer Name</strong></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td><strong>Phone</strong></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td><strong>Delivery Location</strong></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td><strong>Order / Reference No.</strong></td>
+                <td></td>
+            </tr>
+
+        </table>
+
+
+        <h2>Delivered Items</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>No.</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Unit</th>
+                    <th>Remarks</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                ${Array.from(
+                    {length: 12},
+                    (_, i) => `
+
+                    <tr>
+
+                        <td>${i + 1}</td>
+                        <td class="blank"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                    </tr>
+
+                    `
+                ).join("")}
+
+            </tbody>
+
+        </table>
+
+
+        <h2>Delivery Remarks</h2>
+
+        <div class="box">
+
+            <br><br><br>
+
+        </div>
+
+
+        <div class="signature">
+
+            <div>
+                Delivered By
+            </div>
+
+            <div>
+                Received By
+            </div>
+
+        </div>
+
+        `
+    );
+
+}
+
+
+/* =========================================================
+   WATER QUALITY REPORT
+========================================================= */
+
+function downloadWaterQualityReport() {
+
+    downloadDocument(
+        "Blank Water Quality Report",
+        `
+
+        <div class="header">
+
+            <div>
+
+                <h1>
+                    KENYA BOREHOLES SERVICES
+                </h1>
+
+                <p>
+                    Professional Water Solutions Across Kenya
+                </p>
+
+            </div>
+
+            <div>
+
+                <h2>
+                    WATER QUALITY REPORT
+                </h2>
+
+                <p>
+                    Report No: __________________
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <h2>Sample Information</h2>
+
+        <table>
+
+            <tr>
+                <td><strong>Client Name</strong></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td><strong>Sample ID</strong></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td><strong>Sample Location</strong></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td><strong>Water Source</strong></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td><strong>Collection Date</strong></td>
+                <td></td>
+            </tr>
+
+        </table>
+
+
+        <h2>Water Quality Results</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Parameter</th>
+                    <th>Result</th>
+                    <th>Unit</th>
+                    <th>Observation</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                ${[
+                    "pH",
+                    "Turbidity",
+                    "Total Dissolved Solids",
+                    "Electrical Conductivity",
+                    "Colour",
+                    "Odour",
+                    "Hardness",
+                    "Iron",
+                    "Nitrates",
+                    "Fluoride",
+                    "Total Coliforms",
+                    "E. coli"
+                ].map(
+                    parameter => `
+                    <tr>
+                        <td>${parameter}</td>
+                        <td class="blank"></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    `
+                ).join("")}
+
+            </tbody>
+
+        </table>
+
+
+        <h2>Conclusion / Recommendations</h2>
+
+        <div class="box">
+
+            <br><br><br><br>
+
+        </div>
+
+
+        <div class="signature">
+
+            <div>
+                Tested By
+            </div>
+
+            <div>
+                Authorized By
+            </div>
+
+        </div>
+
+        `
+    );
+
+}
+
+
+/* =========================================================
+   BOREHOLE SURVEY SHEET
+========================================================= */
+
+function downloadSurveySheet() {
+
+    downloadDocument(
+        "Borehole Survey Sheet",
+        `
+
+        <div class="header">
+
+            <div>
+
+                <h1>
+                    KENYA BOREHOLES SERVICES
+                </h1>
+
+                <p>
+                    Professional Water Solutions Across Kenya
+                </p>
+
+            </div>
+
+            <div>
+
+                <h2>
+                    BOREHOLE SURVEY SHEET
+                </h2>
+
+                <p>
+                    Survey No: __________________
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <h2>Client Information</h2>
+
+        <table>
+
+            <tr>
+                <td><strong>Client Name</strong></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td><strong>Phone</strong></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td><strong>Location</strong></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td><strong>County</strong></td>
+                <td></td>
+            </tr>
+
+        </table>
+
+
+        <h2>Site Survey Information</h2>
+
+        <table>
+
+            <tr>
+                <td><strong>GPS Latitude</strong></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td><strong>GPS Longitude</strong></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td><strong>Elevation</strong></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td><strong>Ground Conditions</strong></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td><strong>Estimated Groundwater Depth</strong></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td><strong>Proposed Borehole Depth</strong></td>
+                <td></td>
+            </tr>
+
+        </table>
+
+
+        <h2>Survey Observations</h2>
+
+        <div class="box">
+
+            <br><br><br><br><br>
+
+        </div>
+
+
+        <h2>Recommendations</h2>
+
+        <div class="box">
+
+            <br><br><br><br>
+
+        </div>
+
+
+        <div class="signature">
+
+            <div>
+                Surveyor
+            </div>
+
+            <div>
+                Client
+            </div>
+
+        </div>
+
+        `
+    );
+
+}
+
+
+/* =========================================================
+   QUALITY ASSESSMENT
+========================================================= */
+
+const qualityParameters = [
+
+    ["pH", "phResult", "pH", "phAssessment"],
+
+    ["Turbidity", "turbidityResult", "NTU", "turbidityAssessment"],
+
+    ["Total Dissolved Solids", "tdsResult", "mg/L", "tdsAssessment"],
+
+    ["Electrical Conductivity", "ecResult", "µS/cm", "ecAssessment"],
+
+    ["Colour", "colourResult", "Visual", "colourAssessment"],
+
+    ["Odour", "odourResult", "Visual", "odourAssessment"],
+
+    ["Hardness", "hardnessResult", "mg/L", "hardnessAssessment"],
+
+    ["Iron", "ironResult", "mg/L", "ironAssessment"],
+
+    ["Nitrates", "nitrateResult", "mg/L", "nitrateAssessment"],
+
+    ["Fluoride", "fluorideResult", "mg/L", "fluorideAssessment"],
+
+    ["Total Coliforms", "coliformResult", "CFU/100mL", "coliformAssessment"],
+
+    ["E. coli", "ecoliResult", "CFU/100mL", "ecoliAssessment"]
+
+];
+
+
+document
+    .getElementById("qualityForm")
+    .addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            const client =
+                document.getElementById(
+                    "qualityClient"
+                ).value;
+
+            const sampleId =
+                document.getElementById(
+                    "sampleId"
+                ).value;
+
+            const location =
+                document.getElementById(
+                    "sampleLocation"
+                ).value;
+
+            const source =
+                document.getElementById(
+                    "waterSource"
+                ).value;
+
+            const collectionDate =
+                document.getElementById(
+                    "collectionDate"
+                ).value;
+
+            const assessmentDate =
+                document.getElementById(
+                    "assessmentDate"
+                ).value;
+
+            const collectedBy =
+                document.getElementById(
+                    "collectedBy"
+                ).value;
+
+            const testedBy =
+                document.getElementById(
+                    "testedBy"
+                ).value;
+
+            const overall =
+                document.getElementById(
+                    "overallAssessment"
+                ).value;
+
+            const reference =
+                document.getElementById(
+                    "qualityReference"
+                ).value ||
+                generateReference("KBS-WQ");
+
+            const comments =
+                document.getElementById(
+                    "qualityComments"
+                ).value;
+
+
+            document.getElementById(
+                "resultQualityClient"
+            ).textContent = client;
+
+            document.getElementById(
+                "resultSampleId"
+            ).textContent = sampleId;
+
+            document.getElementById(
+                "resultSampleLocation"
+            ).textContent = location;
+
+            document.getElementById(
+                "resultWaterSource"
+            ).textContent = source;
+
+            document.getElementById(
+                "resultCollectionDate"
+            ).textContent =
+                collectionDate || "-";
+
+            document.getElementById(
+                "resultCollectedBy"
+            ).textContent =
+                collectedBy || "-";
+
+            document.getElementById(
+                "resultTestedBy"
+            ).textContent =
+                testedBy || "-";
+
+            document.getElementById(
+                "resultQualityReference"
+            ).textContent =
+                reference;
+
+            document.getElementById(
+                "resultAssessmentDate"
+            ).textContent =
+                assessmentDate ||
+                today();
+
+            document.getElementById(
+                "resultOverallAssessment"
+            ).textContent =
+                overall;
+
+            document.getElementById(
+                "resultQualityComments"
+            ).textContent =
+                comments ||
+                "No additional comments provided.";
+
+
+            const tbody =
+                document.getElementById(
+                    "qualityResultsBody"
+                );
+
+            tbody.innerHTML = "";
+
+
+            qualityParameters.forEach(
+                parameter => {
+
+                    const name =
+                        parameter[0];
+
+                    const resultId =
+                        parameter[1];
+
+                    const unit =
+                        parameter[2];
+
+                    const assessmentId =
+                        parameter[3];
+
+
+                    const result =
+                        document.getElementById(
+                            resultId
+                        ).value;
+
+                    const assessment =
+                        document.getElementById(
+                            assessmentId
+                        ).value;
+
+
+                    const tr =
+                        document.createElement(
+                            "tr"
+                        );
+
+
+                    tr.innerHTML = `
+
+                        <td>
+                            ${escapeHTML(name)}
+                        </td>
+
+                        <td>
+                            ${escapeHTML(result || "-")}
+                        </td>
+
+                        <td>
+                            ${escapeHTML(unit)}
+                        </td>
+
+                        <td>
+                            ${escapeHTML(assessment)}
+                        </td>
+
+                    `;
+
+
+                    tbody.appendChild(tr);
+
+                }
+            );
+
+
+            document
+                .getElementById(
+                    "qualityResult"
+                )
+                .classList.remove(
+                    "hidden"
+                );
+
+
+            document
+                .getElementById(
+                    "qualityResult"
+                )
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        }
+    );
+
+
+/* =========================================================
+   QUALITY PRINT / PDF
+========================================================= */
+
+function downloadQualityPDF() {
+
+    printElementAsPDF(
+        "qualityDocument",
+        "Water Quality Assessment Report"
+    );
+
+}
+
+
+function printQualityReport() {
+
+    printElementAsPDF(
+        "qualityDocument",
+        "Water Quality Assessment Report"
+    );
+
+}
+
+
+function editQualityReport() {
+
+    document
+        .getElementById(
+            "qualityForm"
+        )
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+/* =========================================================
+   SET TODAY'S DATES
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        const todayValue =
+            new Date()
+                .toISOString()
+                .split("T")[0];
+
+
+        const projectDate =
+            document.getElementById(
+                "projectDate"
+            );
+
+        if (projectDate) {
+            projectDate.value =
+                todayValue;
+        }
+
+
+        const collectionDate =
+            document.getElementById(
+                "collectionDate"
+            );
+
+        if (collectionDate) {
+            collectionDate.value =
+                todayValue;
+        }
+
+
+        const assessmentDate =
+            document.getElementById(
+                "assessmentDate"
+            );
+
+        if (assessmentDate) {
+            assessmentDate.value =
+                todayValue;
+        }
+
+
+        calculateAllItems();
+
+    }
+);
+
+</script>
 
 </body>
-
 </html>
